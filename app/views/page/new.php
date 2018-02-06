@@ -104,7 +104,7 @@ if (isset($args['page']['name']) && $args['action'] == "edit") {
 	echo "				<div class='form-group row'>\n";
 	echo "					<label for='protected' class='col-sm-2 control-label'>Protection:</label>\n";
 	echo "					<div class='col-sm-10'>\n";
-	echo "						<input class='form-control' type='text' id='protected' name='protected' value='".$args['page']['protected']."'>\n";
+	echo "						<input class='form-control' type='number' id='protected' name='protected' value='".$args['page']['protected']."'>\n";
 	echo "					</div>\n";
 	echo "				</div>\n";
 

@@ -61,11 +61,11 @@ class config
      * Show or hide error messages on screen
      * @var boolean
      */
-    const SHOW_ERRORS = true; // false
+    const SHOW_ERRORS = false; // false
 
     /**
      * Show or hide error messages on screen
      * @var string
      */
-    const LOG_DIR = 'app_logs'; // Dir to log errors if SHOW_ERRORS = false
+    const LOG_DIR = '/logs/app/'; // Dir to log errors if SHOW_ERRORS = false
 }
