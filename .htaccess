@@ -1,8 +1,23 @@
 # ----------------------------------------------------------------------
-# Zeichensatz setzen
+# Initial Settings
 # ----------------------------------------------------------------------
 
+# Zeichensatz setzen
 AddDefaultCharset UTF-8
+
+# .htacces sichern
+<Files .htaccess>
+	order allow,deny
+	deny from all
+</Files>
+
+# DirectoryIndex
+DirectoryIndex index.php index.html
+
+# Options
+Options -Indexes
+Options +FollowSymLinks
+Options -MultiViews
 
 # ----------------------------------------------------------------------
 # Komprimierung und Caching
