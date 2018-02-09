@@ -21,7 +21,7 @@ class config
      * Database name
      * @var string
      */
-    const DB_NAME = 'master';
+    const DB_NAME = 'custom-cms';
 
     /**
      * Database user
@@ -52,6 +52,18 @@ class config
     ];
 
     /**
+     * Define the length of the Token
+     * @var int
+     */
+    const TOKEN_LENGTH = 20;
+
+    /**
+     * Define the lifetime of the cookies
+     * @var int
+     */
+    const COOKIE_LIFETIME = 30; // 30 Tage
+
+    /**
      * Set app dir if it's not root
      * @var boolean
      */
@@ -61,11 +73,11 @@ class config
      * Show or hide error messages on screen
      * @var boolean
      */
-    const SHOW_ERRORS = false; // false
+    const SHOW_ERRORS = true; // false
 
     /**
      * Show or hide error messages on screen
      * @var string
      */
-    const LOG_DIR = '/logs/app/'; // Dir to log errors if SHOW_ERRORS = false
+    const LOG_DIR = 'logs/app'; // Dir to log errors if SHOW_ERRORS = false
 }

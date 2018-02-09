@@ -3,7 +3,6 @@
 namespace app\views;
 
 use app\config;
-
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -81,7 +80,7 @@ use app\config;
                 <div class=\"dropdown-menu\" aria-labelledby=\"navDropDown\">
                   <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."page/index/\">Index</a>
                   <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."page/new/\">New Page</a>
-                  <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."page/edit/\">Edit Page</a>
+                  <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."page/edit/".$_SERVER['QUERY_STRING']."\">Edit Page</a>
                 </div>
               </li>
               <li class=\"nav-item dropdown\">
