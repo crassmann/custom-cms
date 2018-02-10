@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\config;
 use \core\view;
+use \core\cookie;
 
 /**
  * Pages controller
@@ -25,29 +26,17 @@ class user extends \core\controller
       exit;
     }
 
-    $user = new \app\models\user();
-
     if (isset($_COOKIE['rememberMe']))
     {
-      // Separate selector from validator
-      $cookie = explode("#", $_COOKIE['rememberMe']);
-      $selector = $cookie[0];
-      $validator = $cookie[1];
-      // Grab the row in auth_tokens for the given selector. If none is found, abort
-      if ($auth_token = $user::getAuthTokenBySelector($selector)) {
-        // Hash the validator provided by the user's cookie with SHA-256
-        $hashedValidator = hash('sha256', $validator);
-
-        // Compare the SHA-256 hash we generated with the hash stored in the database, using hash_equals()
-        if (hash_equals($hashedValidator, $auth_token['hashed_validator'])) {
-          // If step passes, associate the current session with the appropriate user ID
-          $_SESSION['userId'] = $auth_token['user_id'];
-          $un = $user::getUserById($_SESSION['userId']);
-          $_SESSION['userName'] = $un['name'];
-          header("Location: ".config::ROOT_APP_DIR."user/index/");
-        } else {
-          $error[] = 'auth_token = false';
-        }
+      $c = new \core\cookie();
+      if ($auth_token = $c::checkAuthCookie($_COOKIE['rememberMe'])) {
+        $u = new \app\models\user();
+        $user = $u::getUserById($auth_token['user_id']);
+        $_SESSION['userId'] = $auth_token['user_id'];
+        $_SESSION['userName'] = $user['name'];
+        header("Location: ".config::ROOT_APP_DIR."user/index/");
+      } else {
+        $error[] = 'auth_token = false';
       }
     }
 
@@ -56,31 +45,25 @@ class user extends \core\controller
       $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
       if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-
-        $hashPassword = $user::getPasswordHash($_POST['email']);
+        $u = new \app\models\user();
+        $hashPassword = $u::getPasswordHash($_POST['email']);
 
         if (password_verify($_POST['password'], $hashPassword)) {
-          $this->route_params['user'] = $user::getUserByEmail($_POST['email']);
+          $this->route_params['user'] = $u::getUserByEmail($_POST['email']);
           $_SESSION['userId'] = $this->route_params['user']['id'];
           $_SESSION['userName'] = $this->route_params['user']['name'];
 
-          if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] == "remember-me")
+          if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me")
           {
-            $selector = $this->generateToken(6);
-            $validator = $this->generateToken();
-            $hashedValidator = hash('sha256', $validator);
-
-            $expires = mktime(0, 0, 0, date("m")  , date("d")+config::COOKIE_LIFETIME, date("Y"));
-            $remember_me = $selector."#".$validator;
-            setcookie("rememberMe", $remember_me, $expires);
-            if ($auth_token = $user::addAuthToken($selector, $hashedValidator, $this->route_params['user']['id'], $expires))
+            $c = new \core\cookie();
+            if ($c::addAuthCookie($this->route_params['user']['id']))
             {
               header("Location: ".config::ROOT_APP_DIR."user/index/");
-            }
-            else {
+            } else {
               $error[] = "Remember Me Error";
             }
           }
+
         }
         else {
           $error[] = "Password is not valid";

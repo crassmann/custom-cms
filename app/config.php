@@ -58,6 +58,11 @@ class config
     const TOKEN_LENGTH = 20;
 
     /**
+     * Define the length of the selector
+     * @var int
+     */
+    const SELECTOR_LENGTH = 6;
+    /**
      * Define the lifetime of the cookies
      * @var int
      */
