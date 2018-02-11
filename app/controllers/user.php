@@ -26,10 +26,9 @@ class user extends \core\controller
       exit;
     }
 
-    if (isset($_COOKIE['rememberMe']))
-    {
-      $c = new \core\cookie();
-      if ($auth_token = $c::checkAuthCookie($_COOKIE['rememberMe'])) {
+    if (isset($_COOKIE['rememberMe'])) {
+      $cookie = new \core\cookie();
+      if ($auth_token = $cookie::checkAuthCookie($_COOKIE['rememberMe'])) {
         $u = new \app\models\user();
         $user = $u::getUserById($auth_token['user_id']);
         $_SESSION['userId'] = $auth_token['user_id'];
@@ -53,17 +52,15 @@ class user extends \core\controller
           $_SESSION['userId'] = $this->route_params['user']['id'];
           $_SESSION['userName'] = $this->route_params['user']['name'];
 
-          if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me")
-          {
-            $c = new \core\cookie();
-            if ($c::addAuthCookie($this->route_params['user']['id']))
-            {
+          if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
+            $cookie = new \core\cookie();
+            if ($cookie::addAuthCookie($this->route_params['user']['id'])) {
               header("Location: ".config::ROOT_APP_DIR."user/index/");
             } else {
               $error[] = "Remember Me Error";
             }
           }
-
+          header("Location: ".config::ROOT_APP_DIR."user/index/");
         }
         else {
           $error[] = "Password is not valid";

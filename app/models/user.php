@@ -114,45 +114,6 @@ class user extends \core\model
   }
 
   /**
-   * Grab the row in auth_tokens for the given selector as an associative array
-   *
-   * @return array
-   */
-  public static function getAuthTokenBySelector($selector) {
-    $db = static::getDB();
-    $stmt = $db->prepare("SELECT * FROM auth_tokens WHERE selector = :selector LIMIT 1");
-    $stmt->execute( array(':selector' => $selector) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result;
-    } else {
-      return false;
-    }
-  }
-
-  /**
-   * Adds a new auth_token
-   *
-   * @return id or false
-   */
-  public static function addAuthToken($selector, $hashed_validator, $user_id, $expires) {
-    $db = static::getDB();
-    $sql = "INSERT INTO `auth_tokens` (`id`, `selector`, `hashed_validator`, `user_id`, `expires`) VALUES (NULL, :selector, :hashed_validator, :user_id, :expires)";
-    $stmt = $db->prepare($sql);
-    $params = array(
-      ':selector' => $selector,
-      ':hashed_validator' => $hashed_validator,
-      ':user_id' => $user_id,
-      ':expires' => $expires,
-    );
-    try {
-      $stmt->execute( $params );
-      return $db->lastInsertId();
-    } catch (\Exception $e) {
-      return $e;
-    }
-  }
-
-  /**
    * Edits a user affecteds properties
    *
    * @return boolean

@@ -56,7 +56,7 @@ class cookie extends model
    *
    * @return id or false
    */
-  public static function addAuthToken($selector, $hashed_validator, $user_id, $expires) {
+  private static function addAuthToken($selector, $hashed_validator, $user_id, $expires) {
     $db = static::getDB();
     $sql = "INSERT INTO `auth_tokens` (`id`, `selector`, `hashed_validator`, `user_id`, `expires`) VALUES (NULL, :selector, :hashed_validator, :user_id, :expires)";
     $stmt = $db->prepare($sql);
@@ -77,15 +77,15 @@ class cookie extends model
   /**
    * Set Auth Cookie
    *
-   * @return void
+   * @return boolean
    */
   public static function addAuthCookie($user_id) {
     $selector = static::generateToken(config::SELECTOR_LENGTH);
     $validator = static::generateToken(config::TOKEN_LENGTH);
-    $hashedValidator = hash('sha256', $validator);
+    $hashed_validator = hash('sha256', $validator);
     $expires = mktime(0, 0, 0, date("m"), date("d")+config::COOKIE_LIFETIME, date("Y"));
     $remember_me = $selector."#".$validator;
-    if ($auth_token = static::addAuthToken($selector, $hashedValidator, $user_id, $expires))
+    if ($auth_token = static::addAuthToken($selector, $hashed_validator, $user_id, $expires))
     {
       setcookie("rememberMe", $remember_me, $expires);
       return true;
@@ -98,7 +98,7 @@ class cookie extends model
   /**
    * Check Auth Cookie
    *
-   * @return void
+   * @return array or false
    */
   public static function checkAuthCookie($c) {
     // Separate selector from validator
@@ -109,16 +109,15 @@ class cookie extends model
     // Grab the row in auth_tokens for the given selector. If none is found, abort
     if ($auth_token = static::getAuthTokenBySelector($selector)) {
       // Hash the validator provided by the user's cookie with SHA-256
-      $hashedValidator = hash('sha256', $validator);
+      $hashed_validator = hash('sha256', $validator);
 
       // Compare the SHA-256 hash we generated with the hash stored in the database, using hash_equals()
       // If step passes, associate the current session with the appropriate user ID
-      if (hash_equals($hashedValidator, $auth_token['hashed_validator'])) {
+      if (hash_equals($hashed_validator, $auth_token['hashed_validator'])) {
         return $auth_token;
-      } else {
-        return false;
-      }
+      } 
     }
+    return false;
   }
 
 }
