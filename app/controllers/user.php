@@ -35,15 +35,16 @@ class user extends \core\controller
             $user = $u::getUserById($auth_token['user_id']);
             $_SESSION['userId'] = $auth_token['user_id'];
             $_SESSION['userName'] = $user['name'];
+            $u::updateLastLogin($auth_token['user_id']);
             header("Location: ".config::ROOT_APP_DIR."user/index/");
           } else {
-            $error[] = 'Error while adding auth_token';
+            $error[] = 'Error while adding Auth Token. Please contact the administrator.';
           }
         } else {
-          $error[] = 'Error while removing auth_token';
+          $error[] = 'Error while removing Auth Token. Please contact the administrator.';
         }
       } else {
-        $error[] = 'Error while checking auth_token';
+        $error[] = 'Invalid Auth Token provided. Delete your cookie or sign in again permanently.';
       }
     }
 
@@ -57,6 +58,7 @@ class user extends \core\controller
 
         if (password_verify($_POST['password'], $hashPassword)) {
           $this->route_params['user'] = $u::getUserByEmail($_POST['email']);
+          $u::updateLastLogin($this->route_params['user']['id']);
           $_SESSION['userId'] = $this->route_params['user']['id'];
           $_SESSION['userName'] = $this->route_params['user']['name'];
 

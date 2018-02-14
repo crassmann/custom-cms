@@ -20,7 +20,8 @@ use app\models\auth;
           <th>erstellt</th>
           <th>State</th>
           <th>ge&auml;ndert</th>
-          <th>AuthCookie</th>
+          <th>Last login</th>
+          <th>AuthToken</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -36,6 +37,7 @@ use app\models\auth;
         echo "<td>".$user["date_created"]."</td>";
         echo "<td>".$user["state"]."</td>";
         echo "<td>".$user["date_modified"]."</td>";
+        echo "<td>".$user["last_login"]."</td>";
         echo "<td>";
         if ($count = $auth::getAuthTokenByUserId($user["id"])) {
           echo "<a href=\"".config::ROOT_APP_DIR."auth/delete/".$user["id"]."\" class=\"btn btn-outline-info btn-sm\">Delete</a>";

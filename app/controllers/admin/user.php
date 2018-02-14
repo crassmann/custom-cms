@@ -3,7 +3,7 @@
 namespace app\controllers\admin;
 
 use \app\config;
-use \core\cookie;
+use \app\auth;
 use \core\view;
 
 /**
@@ -45,8 +45,6 @@ class user extends \app\controllers\user
 
       $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
       if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $hashPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $_POST['password'] = $hashPassword;
         $user = new \app\models\user();
         if ($addedUserId = $user::new($_POST)) {
           header("Location: ".config::ROOT_APP_DIR."user/index/");
@@ -118,7 +116,10 @@ class user extends \app\controllers\user
     // If the delete form is submitted
     if (isset($_POST["userDelete"])) {
       $user = new \app\models\user();
+      $auth = new \app\models\auth();
       if ($this->route_params['deleteUser'] = $user::deleteUser($_POST["userDelete"])) {
+        $auth::removeAuthTokenByUserId($_POST["userDelete"]);
+        $auth::removeAuthCookie();
         $this->indexAction();
       } else {
         $this->errorAction();

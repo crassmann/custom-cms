@@ -85,6 +85,31 @@ class user extends \core\model
   }
 
   /**
+   * Edits a user affecteds properties
+   *
+   * @return boolean
+   */
+  public static function updateLastLogin($id) {
+    $db = static::getDB();
+    $sql = "UPDATE `users` SET";
+    $sql .= " `last_login` = CURRENT_TIMESTAMP";
+    $sql .= " WHERE `users`.`id` = :id";
+    $stmt = $db->prepare($sql);
+
+    try {
+      $stmt->execute( array(':id' => $id) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+
+  /**
    * Adds a new user
    *
    * @return id or false
@@ -97,10 +122,11 @@ class user extends \core\model
     $db = static::getDB();
     $sql = "INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `role`, `state`, `date_created`, `date_modified`) VALUES (NULL, :name, :email, :password, :remember_token, :role, :state, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
     $stmt = $db->prepare($sql);
+    $hashPassword =
     $params = array(
       ':name' => $user['name'],
       ':email' => $user['email'],
-      ':password' => md5($user['password']),
+      ':password' => password_hash($user['password'], PASSWORD_BCRYPT),
       ':remember_token' => $salt,
       ':role' => $user['role'],
       ':state' => 1,
