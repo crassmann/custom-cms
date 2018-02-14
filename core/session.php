@@ -157,9 +157,6 @@ class session extends model {
 		if ( isset( $_COOKIE["userHash"] ) ) {
 			setcookie( "userHash", 0, 1, '/', $this->domain);
 		}
-		if ( isset( $_COOKIE["rememberMe"] ) ) {
-			setcookie( "rememberMe", 0, 1, '/', $this->domain);
-		}
 
 		session_write_close();
 		session_unset();

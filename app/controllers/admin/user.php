@@ -3,6 +3,7 @@
 namespace app\controllers\admin;
 
 use \app\config;
+use \core\cookie;
 use \core\view;
 
 /**
@@ -108,21 +109,20 @@ class user extends \app\controllers\user
    */
   public function deleteAction()
   {
-    // If the delete form is submitted
-    if (isset($_POST["close"])) {
-      $this->route_params['deleteUser'] = $_POST["close"];
+    // If the delete user form is submitted
+    if (isset($_POST["deleteUser"])) {
+      $this->route_params['deleteUser'] = $_POST["deleteUser"];
       view::renderTemplate(basename(__DIR__), 'user/delete', $this->route_params);
     }
 
     // If the delete form is submitted
-    if (isset($_POST["delete"])) {
+    if (isset($_POST["userDelete"])) {
       $user = new \app\models\user();
-      if ($this->route_params['deleteUser'] = $user::deleteUser($_POST["delete"])) {
+      if ($this->route_params['deleteUser'] = $user::deleteUser($_POST["userDelete"])) {
         $this->indexAction();
       } else {
         $this->errorAction();
       }
     }
   }
-
 }

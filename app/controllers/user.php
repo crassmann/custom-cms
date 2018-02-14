@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use app\config;
+use app\auth;
 use \core\view;
-use \core\cookie;
 
 /**
  * Pages controller
@@ -27,15 +27,23 @@ class user extends \core\controller
     }
 
     if (isset($_COOKIE['rememberMe'])) {
-      $cookie = new \core\cookie();
-      if ($auth_token = $cookie::checkAuthCookie($_COOKIE['rememberMe'])) {
-        $u = new \app\models\user();
-        $user = $u::getUserById($auth_token['user_id']);
-        $_SESSION['userId'] = $auth_token['user_id'];
-        $_SESSION['userName'] = $user['name'];
-        header("Location: ".config::ROOT_APP_DIR."user/index/");
+      $auth = new \app\models\auth();
+      if ($auth_token = $auth::checkAuthToken($_COOKIE['rememberMe'])) {
+        if ($auth::removeAuthTokenBySelector($auth_token['selector'])) {
+          if ($auth::addAuth($auth_token['user_id'])) {
+            $u = new \app\models\user();
+            $user = $u::getUserById($auth_token['user_id']);
+            $_SESSION['userId'] = $auth_token['user_id'];
+            $_SESSION['userName'] = $user['name'];
+            header("Location: ".config::ROOT_APP_DIR."user/index/");
+          } else {
+            $error[] = 'Error while adding auth_token';
+          }
+        } else {
+          $error[] = 'Error while removing auth_token';
+        }
       } else {
-        $error[] = 'auth_token = false';
+        $error[] = 'Error while checking auth_token';
       }
     }
 
@@ -53,8 +61,8 @@ class user extends \core\controller
           $_SESSION['userName'] = $this->route_params['user']['name'];
 
           if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
-            $cookie = new \core\cookie();
-            if ($cookie::addAuthCookie($this->route_params['user']['id'])) {
+            $auth = new \app\models\auth();
+            if ($auth::addAuth($this->route_params['user']['id'])) {
               header("Location: ".config::ROOT_APP_DIR."user/index/");
             } else {
               $error[] = "Remember Me Error";
@@ -63,7 +71,7 @@ class user extends \core\controller
           header("Location: ".config::ROOT_APP_DIR."user/index/");
         }
         else {
-          $error[] = "Password is not valid";
+          $error[] = "Please provide valid credentials!";
         }
 
       } else {
@@ -93,13 +101,4 @@ class user extends \core\controller
     }
   }
 
-  /**
-   * Generate Token
-   *
-   * @return array
-   */
-  public function generateToken($length = config::TOKEN_LENGTH)
-  {
-      return bin2hex(random_bytes($length));
-  }
 }
