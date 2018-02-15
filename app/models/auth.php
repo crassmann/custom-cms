@@ -89,6 +89,7 @@ class auth extends \core\model
         if ($auth_token['expires'] > date("Y-m-d- h:m:s")) {
           return $auth_token;
         } else {
+          static::removeAuthTokenBySelector($selector);
           return false;
         }
       }

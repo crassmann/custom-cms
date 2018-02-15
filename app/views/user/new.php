@@ -25,13 +25,6 @@ if (isset($args['editUser']['name']) && $args['action'] == "edit") {
 	echo "				</div>\n";
 
 	echo "				<div class='form-group row'>\n";
-	echo "					<label for='remember_token' class='col-sm-2 control-label'>Remember Token:</label>\n";
-	echo "					<div class='col-sm-10'>\n";
-	echo "						<input class='form-control' type='text' id='remember_token' name='remember_token' placeholder='Remember Token' value='".$args['editUser']['remember_token']."' required>\n";
-	echo "					</div>\n";
-	echo "				</div>\n";
-
-	echo "				<div class='form-group row'>\n";
 	echo "					<label for='role' class='col-sm-2 control-label'>Rolle:</label>\n";
 	echo "					<div class='col-sm-10'>\n";
 	echo "						<input class='form-control' type='number' id='role' name='role' placeholder='Rolle' value='".$args['editUser']['role']."'>\n";
