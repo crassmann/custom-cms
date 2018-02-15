@@ -115,19 +115,13 @@ class user extends \core\model
    * @return id or false
    */
   public static function new($user) {
-    $bytes = openssl_random_pseudo_bytes(20);
-    $hex = bin2hex($bytes);
-    $salt = base64_encode($hex);
-
     $db = static::getDB();
-    $sql = "INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `role`, `state`, `date_created`, `date_modified`) VALUES (NULL, :name, :email, :password, :remember_token, :role, :state, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+    $sql = "INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `state`, `date_created`, `date_modified`) VALUES (NULL, :name, :email, :password, :role, :state, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
     $stmt = $db->prepare($sql);
-    $hashPassword =
     $params = array(
       ':name' => $user['name'],
       ':email' => $user['email'],
       ':password' => password_hash($user['password'], PASSWORD_BCRYPT),
-      ':remember_token' => $salt,
       ':role' => $user['role'],
       ':state' => 1,
     );

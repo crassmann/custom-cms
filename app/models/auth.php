@@ -22,8 +22,9 @@ class auth extends \core\model
     $validator = static::generateToken(config::TOKEN_LENGTH);
     $hashed_validator = hash('sha256', $validator);
     $expires = mktime(0, 0, 0, date("m"), date("d")+config::COOKIE_LIFETIME, date("Y"));
+    $dbExpires = date("Y-m-d h:i:s", $expires);
     $remember_me = $selector."#".$validator;
-    if ($auth_token = static::addAuthToken($selector, $hashed_validator, $user_id, $expires))
+    if ($auth_token = static::addAuthToken($selector, $hashed_validator, $user_id, $dbExpires))
     {
       setcookie("rememberMe", $remember_me, $expires);
       return true;
@@ -40,7 +41,7 @@ class auth extends \core\model
    */
   private static function generateToken($length = config::TOKEN_LENGTH)
   {
-      return bin2hex(random_bytes($length));
+    return bin2hex(random_bytes($length));
   }
 
   /**
@@ -85,7 +86,11 @@ class auth extends \core\model
       // Compare the SHA-256 hash we generated with the hash stored in the database, using hash_equals()
       // If step passes, associate the current session with the appropriate user ID
       if (hash_equals($hashed_validator, $auth_token['hashed_validator'])) {
-        return $auth_token;
+        if ($auth_token['expires'] > date("Y-m-d- h:m:s")) {
+          return $auth_token;
+        } else {
+          return false;
+        }
       }
     }
     return false;
