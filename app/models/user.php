@@ -19,11 +19,12 @@ class user extends \core\model
   protected $name;
   protected $email;
   protected $password;
-  protected $rememberToken;
   protected $role;
   protected $state;
   protected $date_created;
   protected $date_modified;
+  protected $last_login;
+  protected $failed_attempts;
 
   /**
    * Get password_hash by email
@@ -33,10 +34,14 @@ class user extends \core\model
   public static function getPasswordHash($email) {
     $db = static::getDB();
     $stmt = $db->prepare("SELECT password FROM users WHERE email = :email LIMIT 1");
-    $stmt->execute( array(':email' => $email) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result['password'];
-    } else {
+    try {
+      $stmt->execute( array(':email' => $email) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result['password'];
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -49,10 +54,15 @@ class user extends \core\model
   public static function getUserById($id) {
     $db = static::getDB();
     $stmt = $db->prepare("SELECT * FROM users WHERE id = :id LIMIT 1");
-    $stmt->execute( array(':id' => $id) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result;
-    } else {
+
+    try {
+      $stmt->execute( array(':id' => $id) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -65,10 +75,15 @@ class user extends \core\model
   public static function getUserByEmail($email) {
     $db = static::getDB();
     $stmt = $db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-    $stmt->execute( array(':email' => $email) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result;
-    } else {
+
+    try {
+      $stmt->execute( array(':email' => $email) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -108,6 +123,53 @@ class user extends \core\model
     }
   }
 
+  /**
+   * Increases failed login attempts
+   *
+   * @return boolean
+   */
+  public static function increaseFailedLoginAttempts($email) {
+    $db = static::getDB();
+    $sql = "UPDATE `users` SET";
+    $sql .= " `failed_attempts` = failed_attempts + 1";
+    $sql .= " WHERE `users`.`email` = :email";
+    $stmt = $db->prepare($sql);
+
+    try {
+      $stmt->execute( array(':email' => $email) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Resets failed login attempts
+   *
+   * @return boolean
+   */
+  public static function resetFailedLoginAttempts($id) {
+    $db = static::getDB();
+    $sql = "UPDATE `users` SET";
+    $sql .= " `failed_attempts` = 0";
+    $sql .= " WHERE `users`.`id` = :id";
+    $stmt = $db->prepare($sql);
+
+    try {
+      $stmt->execute( array(':id' => $id) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
 
   /**
    * Adds a new user
@@ -169,9 +231,14 @@ class user extends \core\model
     $db = static::getDB();
     $sql = "DELETE FROM `users` WHERE `id` = :id";
     $stmt = $db->prepare($sql);
-    if ($stmt->execute( array(':id' => $id) )) {
-      return $id;
-    } else {
+
+    try {
+      if ($stmt->execute( array(':id' => $id) )) {
+        return $id;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }

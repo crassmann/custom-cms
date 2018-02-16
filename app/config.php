@@ -52,7 +52,13 @@ class config
     ];
 
     /**
-     * Define the length of the Token
+     * Define the max no of login attempts
+     * @var int
+     */
+    const MAX_LOGIN_ATTEMPTS = 5;
+
+    /**
+     * Define the length of the token
      * @var int
      */
     const TOKEN_LENGTH = 20;

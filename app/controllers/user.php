@@ -58,21 +58,28 @@ class user extends \core\controller
 
         if (password_verify($_POST['password'], $hashPassword)) {
           $this->route_params['user'] = $u::getUserByEmail($_POST['email']);
-          $u::updateLastLogin($this->route_params['user']['id']);
-          $_SESSION['userId'] = $this->route_params['user']['id'];
-          $_SESSION['userName'] = $this->route_params['user']['name'];
+          if ($this->route_params['user']['failed_attempts'] < config::MAX_LOGIN_ATTEMPTS) {
+            $u::updateLastLogin($this->route_params['user']['id']);
+            $u::resetFailedLoginAttempts($this->route_params['user']['id']);
+            $_SESSION['userId'] = $this->route_params['user']['id'];
+            $_SESSION['userName'] = $this->route_params['user']['name'];
 
-          if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
-            $auth = new \app\models\auth();
-            if ($auth::addAuth($this->route_params['user']['id'])) {
-              header("Location: ".config::ROOT_APP_DIR."user/index/");
-            } else {
-              $error[] = "Remember Me Error";
+            if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
+              $auth = new \app\models\auth();
+              if ($auth::addAuth($this->route_params['user']['id'])) {
+                header("Location: ".config::ROOT_APP_DIR."user/index/");
+              } else {
+                $error[] = "Remember Me Error";
+              }
             }
+            header("Location: ".config::ROOT_APP_DIR."user/index/");
+          } else {
+            $error[] = "Account closed due to too many login attempts!";
           }
-          header("Location: ".config::ROOT_APP_DIR."user/index/");
+
         }
         else {
+          $u::increaseFailedLoginAttempts($_POST['email']);
           $error[] = "Please provide valid credentials!";
         }
 

@@ -52,6 +52,13 @@ if (isset($args['editUser']['name']) && $args['action'] == "edit") {
 	echo "					</div>\n";
 	echo "				</div>\n";
 
+	echo "				<div class='form-group row'>\n";
+	echo "					<label for='state' class='col-sm-2 control-label'>Failed Attempts:</label>\n";
+	echo "					<div class='col-sm-10'>\n";
+	echo "						<input class='form-control' type='number' id='failed_attempts' name='failed_attempts' placeholder='0' value='".$args['editUser']['failed_attempts']."' required>\n";
+	echo "					</div>\n";
+	echo "				</div>\n";
+
   echo "<br />
 	<div class='form-group row'>
 		<label for='save' class='col-sm-2 control-label'>&nbsp;</label>

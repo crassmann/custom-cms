@@ -18,7 +18,7 @@
       <input type="checkbox" id="inputCheckbox" name="rememberMe" value="remember-me"> Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
+  <button class="btn btn-lg btn-primary" name="submit" type="submit">Sign in</button>
 </form>
 
 <script>
