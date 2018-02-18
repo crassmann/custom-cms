@@ -20,10 +20,14 @@ class page extends \core\model
   public static function getPage($url) {
     $db = static::getDB();
     $stmt = $db->prepare("SELECT * FROM pages WHERE url = :url LIMIT 1");
-    $stmt->execute( array(':url' => $url) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result;
-    } else {
+    try {
+      $stmt->execute( array(':url' => $url) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -109,9 +113,13 @@ class page extends \core\model
     $db = static::getDB();
     $sql = "DELETE FROM `pages` WHERE `id` = :id";
     $stmt = $db->prepare($sql);
-    if ($stmt->execute( array(':id' => $id) )) {
-      return $id;
-    } else {
+    try {
+      if ($stmt->execute( array(':id' => $id) )) {
+        return $id;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }

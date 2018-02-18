@@ -105,10 +105,14 @@ class auth extends \core\model
   private static function getAuthTokenBySelector($selector) {
     $db = static::getDB();
     $stmt = $db->prepare("SELECT * FROM auth_tokens WHERE selector = :selector LIMIT 1");
-    $stmt->execute( array(':selector' => $selector) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result;
-    } else {
+    try {
+      $stmt->execute( array(':selector' => $selector) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -122,9 +126,13 @@ class auth extends \core\model
     $db = static::getDB();
     $sql = "DELETE FROM `auth_tokens` WHERE `selector` = :selector";
     $stmt = $db->prepare($sql);
-    if ($stmt->execute( array(':selector' => $selector) )) {
-      return true;
-    } else {
+    try {
+      if ($stmt->execute( array(':selector' => $selector) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -137,10 +145,14 @@ class auth extends \core\model
   public static function getAuthTokenByUserId($user_id) {
     $db = static::getDB();
     $stmt = $db->prepare("SELECT COUNT(*) as count FROM auth_tokens WHERE user_id = :user_id");
-    $stmt->execute( array(':user_id' => $user_id) );
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result['count'];
-    } else {
+    try {
+      $stmt->execute( array(':user_id' => $user_id) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result['count'];
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
       return false;
     }
   }
@@ -154,12 +166,16 @@ class auth extends \core\model
     $db = static::getDB();
     $sql = "DELETE FROM `auth_tokens` WHERE `user_id` = :user_id";
     $stmt = $db->prepare($sql);
-    if ($stmt->execute( array(':user_id' => $user_id) )) {
-      if ( isset( $_COOKIE["rememberMe"] ) ) {
-        setcookie( "rememberMe", 0, 1);
+    try {
+      if ($stmt->execute( array(':user_id' => $user_id) )) {
+        if ( isset( $_COOKIE["rememberMe"] ) ) {
+          setcookie( "rememberMe", 0, 1);
+        }
+        return true;
+      } else {
+        return false;
       }
-      return true;
-    } else {
+    } catch (\Exception $e) {
       return false;
     }
   }
