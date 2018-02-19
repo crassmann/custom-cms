@@ -52,6 +52,30 @@ class config
     ];
 
     /**
+     * Set app dir if it's not root
+     * @var boolean
+     */
+    const ROOT_APP_DIR = '/projects/custom-cms/';
+
+    /**
+     * Show or hide error messages on screen
+     * @var boolean
+     */
+    const SHOW_ERRORS = true; // false
+
+    /**
+     * Set log dir to log error messages if SHOW_ERRORS = false
+     * @var string
+     */
+    const LOG_DIR = 'logs/app'; // Dir to log errors if SHOW_ERRORS = false
+
+    /**
+     * Set the default template
+     * @var string
+     */
+    const DEFAULT_TEMPLATE = 'default'; // Dir to log errors if SHOW_ERRORS = false
+
+    /**
      * Define the max no of login attempts
      * @var int
      */
@@ -74,21 +98,4 @@ class config
      */
     const COOKIE_LIFETIME = 30; // 30 Tage
 
-    /**
-     * Set app dir if it's not root
-     * @var boolean
-     */
-    const ROOT_APP_DIR = '/projects/custom-cms/';
-
-    /**
-     * Show or hide error messages on screen
-     * @var boolean
-     */
-    const SHOW_ERRORS = true; // false
-
-    /**
-     * Show or hide error messages on screen
-     * @var string
-     */
-    const LOG_DIR = 'logs/app'; // Dir to log errors if SHOW_ERRORS = false
 }

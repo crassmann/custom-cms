@@ -8,7 +8,7 @@ use app\config;
 
 <h1>Page Index</h1>
 <div class="table-responsive">
-  <form id="delete-page-form" action="<?php  echo config::ROOT_APP_DIR."page/delete/"; ?>" method="post">
+  <form id="delete-page-form" action="<?php echo config::ROOT_APP_DIR."page/delete/"; ?>" method="post">
     <table class="table table-striped">
       <thead>
         <tr>

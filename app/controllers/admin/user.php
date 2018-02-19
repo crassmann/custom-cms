@@ -23,7 +23,7 @@ class user extends \app\controllers\user
   {
     $user = new \app\models\user();
     if ($this->route_params['user'] = $user::getUsers()) {
-      view::renderTemplate(basename(__DIR__), 'user/index', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/index', $this->route_params);
     } else {
       $this->errorAction();
     }
@@ -54,7 +54,7 @@ class user extends \app\controllers\user
       }
 
     } else {
-      view::renderTemplate(basename(__DIR__), 'user/new', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/new', $this->route_params);
     }
   }
 
@@ -90,14 +90,13 @@ class user extends \app\controllers\user
           header("Location: ".config::ROOT_APP_DIR.$this->route_params['controller']."/".$this->route_params['action']."/".$this->route_params['editUser']['id']);
           exit;
         } else {
-          $this->errorAction();
+            $this->errorAction();
           exit;
         }
       }
 
     }
-    view::renderTemplate(basename(__DIR__), 'user/new', $this->route_params);
-
+    view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/new', $this->route_params);
   }
 
   /**
@@ -110,7 +109,7 @@ class user extends \app\controllers\user
     // If the delete user form is submitted
     if (isset($_POST["deleteUser"])) {
       $this->route_params['deleteUser'] = $_POST["deleteUser"];
-      view::renderTemplate(basename(__DIR__), 'user/delete', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/delete', $this->route_params);
     }
 
     // If the delete form is submitted
@@ -125,5 +124,6 @@ class user extends \app\controllers\user
         $this->errorAction();
       }
     }
+    $this->errorAction();
   }
 }

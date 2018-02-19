@@ -3,6 +3,8 @@
 namespace core;
 
 use app\config;
+use \core\view;
+
 /**
  * Base controller
  *
@@ -73,5 +75,15 @@ abstract class controller extends app
      * @return void
      */
     protected function after() {
+    }
+
+    /**
+     * Show the Error page
+     *
+     * @return void
+     */
+    public function errorAction($code = 404)
+    {
+      view::renderTemplate(config::DEFAULT_TEMPLATE, $code, $this->route_params);
     }
 }

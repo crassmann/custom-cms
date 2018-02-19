@@ -61,7 +61,7 @@ class error
 
         error_log($message);
 
-        view::renderTemplate('default', $code);
+        view::renderTemplate(config::DEFAULT_TEMPLATE, $code);
       }
     }
 }

@@ -28,14 +28,4 @@ class page extends \core\controller
     }
   }
 
-  /**
-   * Show the index page
-   *
-   * @return void
-   */
-  public function errorAction()
-  {
-    view::renderTemplate('default', '404', $this->route_params);
-  }
-
 }

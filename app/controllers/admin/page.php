@@ -21,7 +21,7 @@ class page extends \app\controllers\page
   public function indexAction() {
     $page = new \app\models\page();
     if ($this->route_params['page'] = $page::getPages()) {
-      view::renderTemplate(basename(__DIR__), 'page/index', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'page/index', $this->route_params);
     } else {
       $this->errorAction();
     }
@@ -44,11 +44,11 @@ class page extends \app\controllers\page
       if ($this->route_params['page'] = $page::new($post)) {
         header("Location: ".config::ROOT_APP_DIR."page/edit/".$post['url']);
       } else {
-        view::renderTemplate(basename(__DIR__), 'page/new', $this->route_params);
+        view::renderTemplate(config::DEFAULT_TEMPLATE, 'page/new', $this->route_params);
       }
 
     } else {
-      view::renderTemplate(basename(__DIR__), 'page/new', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'page/new', $this->route_params);
     }
   }
 
@@ -89,7 +89,7 @@ class page extends \app\controllers\page
       }
 
     }
-    view::renderTemplate(basename(__DIR__), 'page/new', $this->route_params);
+    view::renderTemplate(config::DEFAULT_TEMPLATE, 'page/new', $this->route_params);
 
   }
 
@@ -102,14 +102,14 @@ class page extends \app\controllers\page
     // If the delete form is submitted
     if (isset($_POST["close"])) {
       $this->route_params['page'] = $_POST["close"];
-      view::renderTemplate(basename(__DIR__), 'page/delete', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'page/delete', $this->route_params);
     }
 
     // If the delete form is submitted
     if (isset($_POST["delete"])) {
       $page = new \app\models\page();
       if ($this->route_params['page'] = $page::deletePage($_POST["delete"])) {
-        view::renderTemplate(basename(__DIR__), 'page/index', $this->route_params);
+        view::renderTemplate(config::DEFAULT_TEMPLATE, 'page/index', $this->route_params);
       } else {
         $this->errorAction();
       }

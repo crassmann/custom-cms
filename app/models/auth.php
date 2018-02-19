@@ -15,6 +15,8 @@ class auth extends \core\model
   /**
    * Set Auth Token
    *
+   * @param Int $id  The user id
+   *
    * @return boolean
    */
   public static function addAuth($user_id) {
@@ -47,6 +49,8 @@ class auth extends \core\model
   /**
    * Adds a new auth_token
    *
+   * @param Mixed various  The params
+   *
    * @return id or false
    */
   private static function addAuthToken($selector, $hashed_validator, $user_id, $expires) {
@@ -69,6 +73,8 @@ class auth extends \core\model
 
   /**
    * Check Auth Cookie
+   *
+   * @param Cookie $c  The cookie
    *
    * @return array or false
    */
@@ -100,6 +106,8 @@ class auth extends \core\model
   /**
    * Grab the row in auth_tokens for the given selector as an associative array
    *
+   * @param String $selector  The selector
+   *
    * @return array or false
    */
   private static function getAuthTokenBySelector($selector) {
@@ -119,6 +127,8 @@ class auth extends \core\model
 
   /**
    * Remove Auth Token by selector
+   *
+   * @param String $selector  The selector
    *
    * @return boolean
    */
@@ -140,6 +150,8 @@ class auth extends \core\model
   /**
    * Count rows on match
    *
+   * @param Int $user_id  The users id
+   *
    * @return boolean
    */
   public static function getAuthTokenByUserId($user_id) {
@@ -159,6 +171,8 @@ class auth extends \core\model
 
   /**
    * Remove Auth Token by Id
+   *
+   * @param Int $user_id  The users id
    *
    * @return boolean
    */

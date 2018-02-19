@@ -15,6 +15,8 @@ class page extends \core\model
   /**
    * Get a page by URL
    *
+   * @param String $url  The url
+   *
    * @return array
    */
   public static function getPage($url) {
@@ -45,6 +47,8 @@ class page extends \core\model
 
   /**
    * Adds a new page
+   *
+   * @param Array $page  The page params
    *
    * @return id or false
    */
@@ -80,6 +84,9 @@ class page extends \core\model
   /**
    * Edits a page affecteds properties
    *
+   * @param Int $id  The page id
+   * @param Array $changes  The page params
+   *
    * @return boolean
    */
   public static function edit($id, $changes) {
@@ -106,6 +113,8 @@ class page extends \core\model
 
   /**
    * Deletes a page
+   *
+   * @param Int $id  The page id
    *
    * @return array
    */

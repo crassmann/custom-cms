@@ -30,7 +30,7 @@ class auth extends \core\controller
       }
     } else {
       $this->route_params['deleteAuth'] = $this->route_params['request'];
-      view::renderTemplate(basename(__DIR__), 'auth/delete', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'auth/delete', $this->route_params);
     }
   }
 }

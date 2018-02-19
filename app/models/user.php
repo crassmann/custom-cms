@@ -29,6 +29,8 @@ class user extends \core\model
   /**
    * Get password_hash by email
    *
+   * @param String $email  The users email
+   *
    * @return string
    */
   public static function getPasswordHash($email) {
@@ -48,6 +50,8 @@ class user extends \core\model
 
   /**
    * Get the user by id as an associative array
+   *
+   * @param Int $id  The users id
    *
    * @return array
    */
@@ -69,6 +73,8 @@ class user extends \core\model
 
   /**
    * Get the user by email as an associative array
+   *
+   * @param String $email  The users email
    *
    * @return array
    */
@@ -102,6 +108,8 @@ class user extends \core\model
   /**
    * Edits a user affecteds properties
    *
+   * @param Int $id  The users id
+   *
    * @return boolean
    */
   public static function updateLastLogin($id) {
@@ -125,6 +133,8 @@ class user extends \core\model
 
   /**
    * Increases failed login attempts
+   *
+   * @param String $email  The users email
    *
    * @return boolean
    */
@@ -150,6 +160,8 @@ class user extends \core\model
   /**
    * Resets failed login attempts
    *
+   * @param Int $id  The users id
+   *
    * @return boolean
    */
   public static function resetFailedLoginAttempts($id) {
@@ -174,6 +186,8 @@ class user extends \core\model
   /**
    * Adds a new user
    *
+   * @param Array $user  The user params
+   *
    * @return id or false
    */
   public static function new($user) {
@@ -197,6 +211,9 @@ class user extends \core\model
 
   /**
    * Edits a user affecteds properties
+   *
+   * @param Int $id  The users id
+   * @param Array $changes  The params
    *
    * @return boolean
    */
@@ -224,6 +241,8 @@ class user extends \core\model
 
   /**
    * Deletes a user
+   *
+   * @param Int $id  The users id
    *
    * @return array
    */
