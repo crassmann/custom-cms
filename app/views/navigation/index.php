@@ -32,4 +32,3 @@ use app\config;
     </table>
   </form>
 </div>
-<a href="<?php echo config::ROOT_APP_DIR; ?>navigation/new/" class="btn btn-primary" role="button">Neue Navigation anlegen</a>

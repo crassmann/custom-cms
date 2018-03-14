@@ -16,6 +16,23 @@ use app\config;
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="navbar-nav mr-auto">
         <?php
+        if (isset($args['navigation'])) {
+          foreach ($args['navigation'] as $key => $value) {
+            if ($value['url'] != $args['request']) {
+              echo "
+              <li class='nav-item'>
+                <a class='nav-link' href='".config::ROOT_APP_DIR.$value['url']."'>".$value['name']."</a>
+              </li>
+              ";
+            } else {
+              echo "
+              <li class='nav-item active'>
+                <a class='nav-link' href='".config::ROOT_APP_DIR.$value['url']."'>".$value['name']." <span class='sr-only'>(current)</span></a>
+              </li>
+              ";
+            }
+          }
+        }
         if (isset($_SESSION['userId'])) {
           echo "
           <li class=\"nav-item dropdown\">
@@ -42,12 +59,6 @@ use app\config;
               <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/new/\">New User</a>
               <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."logout\">Logout</a>
             </div>
-          </li>
-          ";
-        } else {
-          echo "
-          <li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"".config::ROOT_APP_DIR."login\">Login</a>
           </li>
           ";
         }

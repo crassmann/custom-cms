@@ -2,7 +2,7 @@
 
 namespace app\controllers\admin;
 
-use \app\config;
+use app\config;
 use \core\view;
 
 /**

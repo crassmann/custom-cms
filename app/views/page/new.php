@@ -1,4 +1,9 @@
 <?php
+
+namespace app\views\page;
+
+use app\config;
+
 if (isset($args['page']['name']) && $args['action'] == "edit") {
 	echo "<h1>Edit: ".$args['page']['name']."</h1>";
 	echo "<div><form enctype='multipart/form-data' class='form-horizontal' action='' method='post' id='needs-validation' novalidate>\n";
@@ -133,6 +138,7 @@ if (isset($args['page']['name']) && $args['action'] == "edit") {
 	<div class='form-group row'>
 		<label for='save' class='col-sm-2 control-label'>&nbsp;</label>
 		<div class='col-sm-10'>
+			<a class='btn btn-lg btn-info' href='".config::ROOT_APP_DIR.$args['page']['url']."' role='button'>view</a>
 			<button id='add' type='submit' name='submit' value='edit' class='btn btn-lg btn-success'><span class=\"glyphicon glyphicon-floppy-disk\"></span> speichern</button>
 		</div>
 	</div>

@@ -73,7 +73,7 @@ class config
      * Set the default template
      * @var string
      */
-    const DEFAULT_TEMPLATE = 'default'; // Dir to log errors if SHOW_ERRORS = false
+    const DEFAULT_TEMPLATE = 'default'; // Default Template
 
     /**
      * Define the max no of login attempts

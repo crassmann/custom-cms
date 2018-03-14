@@ -58,12 +58,12 @@ use app\config;
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id="
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PSKD7"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 
     <?php
-      // Footer view
+      // Navigation view
       \core\view::render('navigation', $args);
     ?>
 

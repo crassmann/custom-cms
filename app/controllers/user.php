@@ -90,7 +90,7 @@ class user extends \core\controller
     if (isset($error)) {
       $this->route_params['error'] = $error;
     }
-    view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+    view::renderTemplate($this->route_params['template'], $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
   }
 
   /**

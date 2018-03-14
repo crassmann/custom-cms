@@ -2,8 +2,8 @@
 
 namespace app\controllers\admin;
 
-use \app\config;
-use \app\auth;
+use app\config;
+use app\auth;
 use \core\view;
 
 /**

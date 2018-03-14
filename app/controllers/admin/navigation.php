@@ -42,4 +42,27 @@ class navigation extends \core\controller
       }
     }
   }
+
+  /**
+   * Deletes a navigation item
+   *
+   * @return void
+   */
+  public function deleteAction() {
+    // If the delete form is submitted
+    if (isset($_POST["close"])) {
+      $this->route_params['navigation'] = $_POST["close"];
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'navigation/delete', $this->route_params);
+    }
+
+    // If the delete form is submitted
+    if (isset($_POST["delete"])) {
+      $navigation = new \app\models\navigation();
+      if ($this->route_params['navigation'] = $navigation::deleteNavigationItem($_POST["delete"])) {
+        view::renderTemplate(config::DEFAULT_TEMPLATE, 'navigation/index', $this->route_params);
+      } else {
+        $this->errorAction();
+      }
+    }
+  }
 }

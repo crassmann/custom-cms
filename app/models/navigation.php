@@ -66,5 +66,27 @@ class navigation extends \core\model
       return $e;
     }
   }
+
+  /**
+   * Deletes a navigation item
+   *
+   * @param Int $id  The page id
+   *
+   * @return array
+   */
+  public static function deleteNavigationItem($nid, $pid) {
+    $db = static::getDB();
+    $sql = "DELETE FROM `navigation_items` WHERE `nid` = :nid AND `pid` = :pid";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':nid' => $nid, ':pid' => $pid) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
 }
 ?>
