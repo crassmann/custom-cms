@@ -5,27 +5,31 @@ namespace app\models;
 use PDO;
 
 /**
- * Page model
+ * url model
  *
  * PHP version 7.0
  */
 class page extends \core\model
 {
-
   /**
-   * Get a page by URL
+   * Gets all pages
    *
-   * @param String $url  The url
+   * @param Int $id  The url id
    *
    * @return array
    */
-  public static function getPage($url) {
+  public static function getPages() {
     $db = static::getDB();
-    $stmt = $db->prepare("SELECT * FROM pages WHERE url = :url LIMIT 1");
+    $sql = "SELECT url_id, COUNT(item_id) AS items, urls.name, urls.url FROM `pages`\n"
+        . "JOIN urls ON urls.id = url_id\n"
+        . "WHERE 1 GROUP BY url_id";
     try {
-      $stmt->execute( array(':url' => $url) );
-      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        return $result;
+      if ($stmt = $db->query($sql)) {
+        if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+          return $result;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
@@ -35,96 +39,141 @@ class page extends \core\model
   }
 
   /**
-   * Get all pages as an associative array
+   * Gets a url items
+   *
+   * @param Int $id  The url id
    *
    * @return array
    */
-  public static function getPages() {
+  public static function getPageItems($id) {
     $db = static::getDB();
-    $stmt = $db->query('SELECT * FROM pages WHERE 1');
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  /**
-   * Adds a new page
-   *
-   * @param Array $page  The page params
-   *
-   * @return id or false
-   */
-  public static function new($page) {
-    $db = static::getDB();
-    $sql = "INSERT INTO `pages` (`id`, `name`, `display_name`, `url`, `title`, `headline`, `subline`, `content`, `user_id`, `category_id`, `meta_title`, `meta_desc`, `meta_keywords`, `meta_robots`, `protected`, `date_created`, `date_modified`, `modified_by`) VALUES (NULL, :name, :display_name, :url, :title, :headline, :subline, :content, :user_id, :category_id, :meta_title, :meta_desc, :meta_keywords, :meta_robots, :protected, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :modified_by)";
-    $stmt = $db->prepare($sql);
-    $params = array(
-      ':name' => $page['name'],
-      ':display_name' => $page['display_name'],
-      ':url' => $page['url'],
-      ':title' => $page['title'],
-      ':headline' => $page['headline'],
-      ':subline' => $page['subline'],
-      ':content' => $page['content'],
-      ':user_id' => $_SESSION['userId'],
-      ':category_id' => $page['category_id'],
-      ':meta_title' => $page['meta_title'],
-      ':meta_desc' => $page['meta_desc'],
-      ':meta_keywords' => $page['meta_keywords'],
-      ':meta_robots' => $page['meta_robots'],
-      ':protected' => $page['protected'],
-      ':modified_by' => $_SESSION['userId'],
-    );
-    try {
-      $stmt->execute( $params );
-      return $db->lastInsertId();
-    } catch (\Exception $e) {
-      return false;
-    }
-  }
-
-  /**
-   * Edits a page affecteds properties
-   *
-   * @param Int $id  The page id
-   * @param Array $changes  The page params
-   *
-   * @return boolean
-   */
-  public static function edit($id, $changes) {
-    $db = static::getDB();
-    $sql = "UPDATE `pages` SET";
-    $sql .= " `date_modified` = CURRENT_TIMESTAMP";
-    foreach ($changes as $key => $value) {
-      $sql .= ", `$key` = :$key";
-    }
-    $sql .= " WHERE `pages`.`id` = $id";
-    $stmt = $db->prepare($sql);
-
-    $params = [];
-    foreach ($changes as $key => $value) {
-      $params[':'.$key] = $value;
-    }
-    try {
-      $stmt->execute( $params );
-      return true;
-    } catch (\Exception $e) {
-      return false;
-    }
-  }
-
-  /**
-   * Deletes a page
-   *
-   * @param Int $id  The page id
-   *
-   * @return array
-   */
-  public static function deletePage($id) {
-    $db = static::getDB();
-    $sql = "DELETE FROM `pages` WHERE `id` = :id";
+    $sql = "SELECT * FROM `items` \n"
+        . "JOIN pages ON pages.item_id = items.id\n"
+        . "WHERE pages.url_id = :id ORDER BY position ASC";
     $stmt = $db->prepare($sql);
     try {
       if ($stmt->execute( array(':id' => $id) )) {
-        return $id;
+        if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+          return $result;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Adds a navigation item
+   *
+   * @param Int $nid  The navi id
+   * @param Int $pid  The page id
+   *
+   * @return boolean
+   */
+  public static function addItem($url_id, $item_id) {
+    $db = static::getDB();
+    $sql = "INSERT INTO `pages` (`page_id`, `url_id`, `item_id`, `position`, `date_modified`) VALUES (NULL, :url_id, :item_id, :position, CURRENT_TIMESTAMP)";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(
+        ':url_id' => $url_id,
+        ':item_id' => $item_id,
+        ':position' => 0,
+        )
+      )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Updates a page item
+   *
+   * @param Int $id  The page id
+   *
+   * @return array
+   */
+  public static function updatePageItem($page_id, $position) {
+    $db = static::getDB();
+    $sql = "UPDATE `pages` SET `position` = :position WHERE `pages`.`page_id` = :page_id";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':position' => $position, ':page_id' => $page_id) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Deletes an item
+   *
+   * @param Int $id  The item id
+   *
+   * @return array
+   */
+  public static function deleteItem($id) {
+    $db = static::getDB();
+    $sql = "DELETE FROM `pages` WHERE `page_id` = :id";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':id' => $id) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Deletes an item by URL id
+   *
+   * @param Int $id  The url id
+   *
+   * @return array
+   */
+  public static function deleteByURL($url_id) {
+    $db = static::getDB();
+    $sql = "DELETE FROM `pages` WHERE `url_id` = :url_id";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':url_id' => $url_id) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Deletes an item by item id
+   *
+   * @param Int $id  The item id
+   *
+   * @return array
+   */
+  public static function deleteByItem($item_id) {
+    $db = static::getDB();
+    $sql = "DELETE FROM `pages` WHERE `item_id` = :item_id";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':item_id' => $item_id) )) {
+        return true;
       } else {
         return false;
       }

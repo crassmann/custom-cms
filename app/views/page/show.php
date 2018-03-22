@@ -1,4 +1,5 @@
 <?php
-echo "<h1>".$args['page']['title']."</h1>";
-echo $args['page']['content'];
+foreach ($args['items'] as $item) {
+  echo $item['content'];
+}
 ?>

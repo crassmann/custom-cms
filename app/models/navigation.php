@@ -44,9 +44,9 @@ class navigation extends \core\model
    */
   public static function getNavigation($nid) {
     $db = static::getDB();
-    $sql = 'SELECT * FROM `pages`'
+    $sql = 'SELECT * FROM `urls`'
           . ' JOIN `navigation_items`'
-          . ' ON `navigation_items`.`pid` = `pages`.`id`'
+          . ' ON `navigation_items`.`pid` = `urls`.`id`'
           . ' WHERE `navigation_items`.`nid` = :nid'
           . ' AND `navigation_items`.`parent` = :parent'
           . ' ORDER BY `position` ASC';
@@ -68,18 +68,70 @@ class navigation extends \core\model
   }
 
   /**
+   * Adds a navigation item
+   *
+   * @param Int $nid  The navi id
+   * @param Int $pid  The page id
+   *
+   * @return boolean
+   */
+  public static function addNavigationItem($nid, $pid) {
+    $db = static::getDB();
+    $sql = "INSERT INTO `navigation_items` (`navi_id`, `nid`, `pid`, `position`, `parent`, `child_position`, `date_modified`) VALUES (NULL, :nid, :pid, :position, :parent, :child_position, CURRENT_TIMESTAMP)";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(
+        ':nid' => $nid,
+        ':pid' => $pid,
+        ':position' => 0,
+        ':parent' => 0,
+        ':child_position' => -1,
+        )
+      )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Updates a navigation item
+   *
+   * @param Int $id  The page id
+   *
+   * @return array
+   */
+  public static function updateNavigationItem($navi_id, $position) {
+    $db = static::getDB();
+    $sql = "UPDATE `navigation_items` SET `position` = :position WHERE `navigation_items`.`navi_id` = :navi_id";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':position' => $position, ':navi_id' => $navi_id) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
    * Deletes a navigation item
    *
    * @param Int $id  The page id
    *
    * @return array
    */
-  public static function deleteNavigationItem($nid, $pid) {
+  public static function deleteNavigationItem($id) {
     $db = static::getDB();
-    $sql = "DELETE FROM `navigation_items` WHERE `nid` = :nid AND `pid` = :pid";
+    $sql = "DELETE FROM `navigation_items` WHERE `navi_id` = :id";
     $stmt = $db->prepare($sql);
     try {
-      if ($stmt->execute( array(':nid' => $nid, ':pid' => $pid) )) {
+      if ($stmt->execute( array(':id' => $id) )) {
         return true;
       } else {
         return false;

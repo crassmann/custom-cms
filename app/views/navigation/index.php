@@ -14,7 +14,6 @@ use app\config;
         <tr>
           <th>Id</th>
           <th>Name</th>
-          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -23,7 +22,6 @@ use app\config;
         foreach ($args['navigations'] as $navi) {
         echo "<td>".$navi["id"]."</td>";
         echo "<td><a href=\"".config::ROOT_APP_DIR."navigation/edit/".$navi["id"]."\">".$navi["name"]."</a></td>";
-        echo "<td><button type=\"submit\" class=\"close\" name=\"close\" value=\"".$navi["id"]."\" id=\"".$navi["id"]."\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></td>";
         echo "</tr><tr>";
         }
         ?>

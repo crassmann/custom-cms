@@ -32,11 +32,32 @@ class navigation extends \core\controller
    * @return void
    */
   public function editAction() {
+
     if ( isset($this->route_params['request']) ) {
       $navigation = new \app\models\navigation();
-      if ($this->route_params['navigation'] = $navigation::getNavigation($this->route_params['request'])) {
-        //var_dump($this->route_params);
-        view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+      $page = new \app\models\page();
+      // If the delete form is submitted
+      if (isset($_POST["deleteItem"])) {
+        $this->route_params['deleteItem'] = $_POST["deleteItem"];
+        view::renderTemplate(config::DEFAULT_TEMPLATE, 'navigation/delete', $this->route_params);
+      }
+      // If the add form is submitted
+      if (isset($_POST["add_page"]) && !empty($_POST["add_page"])) {
+        $this->route_params['addItem'] = $navigation::addNavigationItem($this->route_params['request'], $_POST["add_page"]);
+      }
+      // If the save form is submitted
+      if (isset($_POST["save"])) {
+        $this->route_params['navi'] = $navigation::getNavigation($this->route_params['request']);
+        foreach ($this->route_params['navi'] as $key => $value) {
+          if ($value['position'] != $_POST[$value['navi_id']]['position']) {
+            $navigation::updateNavigationItem($value['navi_id'], $_POST[$value['navi_id']]['position']);
+          }
+        }
+      }
+      if ($this->route_params['navi'] = $navigation::getNavigation($this->route_params['request'])) {
+        if ($this->route_params['pages'] = $page::getPages()) {
+          view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+        }
       } else {
         $this->errorAction();
       }
@@ -49,20 +70,17 @@ class navigation extends \core\controller
    * @return void
    */
   public function deleteAction() {
-    // If the delete form is submitted
-    if (isset($_POST["close"])) {
-      $this->route_params['navigation'] = $_POST["close"];
-      view::renderTemplate(config::DEFAULT_TEMPLATE, 'navigation/delete', $this->route_params);
-    }
 
     // If the delete form is submitted
     if (isset($_POST["delete"])) {
       $navigation = new \app\models\navigation();
-      if ($this->route_params['navigation'] = $navigation::deleteNavigationItem($_POST["delete"])) {
-        view::renderTemplate(config::DEFAULT_TEMPLATE, 'navigation/index', $this->route_params);
+      if ($this->route_params['delNavItem'] = $navigation::deleteNavigationItem($_POST["delete"])) {
+        header("Location: ".config::ROOT_APP_DIR."navigation/edit/".$this->route_params['request']);
       } else {
         $this->errorAction();
       }
+    } else if (isset($this->route_params['request'])) {
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'navigation/delete', $this->route_params);
     }
   }
 }

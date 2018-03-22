@@ -15,12 +15,7 @@ use app\config;
           <th>Id</th>
           <th>Name</th>
           <th>URL</th>
-          <th>Category</th>
-          <th>Protection</th>
-          <th>erstellt</th>
-          <th>von</th>
-          <th>ge&auml;ndert</th>
-          <th>von</th>
+          <th>Items</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -28,16 +23,11 @@ use app\config;
         <tr>
         <?php
         foreach ($args['page'] as $page) {
-        echo "<td>".$page["id"]."</td>";
-        echo "<td><a href=\"".config::ROOT_APP_DIR."page/edit/".$page["url"]."\">".$page["name"]."</a></td>";
+        echo "<td>".$page["url_id"]."</td>";
+        echo "<td><a href=\"".config::ROOT_APP_DIR."page/edit/".$page["url_id"]."\">".$page["name"]."</a></td>";
         echo "<td><a href=\"".config::ROOT_APP_DIR.$page["url"]."\">".$page["url"]."</a></td>";
-        echo "<td>".$page["category_id"]."</td>";
-        echo "<td>".$page["protected"]."</td>";
-        echo "<td>".$page["date_created"]."</td>";
-        echo "<td>".$page["user_id"]."</td>";
-        echo "<td>".$page["date_modified"]."</td>";
-        echo "<td>".$page["modified_by"]."</td>";
-        echo "<td><button type=\"submit\" class=\"close\" name=\"close\" value=\"".$page["id"]."\" id=\"".$page["id"]."\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></td>";
+        echo "<td>".$page["items"]."</td>";
+        echo "<td><button type=\"submit\" class=\"close\" name=\"close\" value=\"".$page["url_id"]."\" id=\"".$page["url_id"]."\" aria-label=\"Close\"><i class=\"material-icons\">close</i></button></td>";
         echo "</tr><tr>";
         }
         ?>

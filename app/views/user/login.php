@@ -8,7 +8,7 @@
     echo "</div>";
   }
   ?>
-  <h2 class="form-signin-heading">Please sign in</h2>
+  <h2 class="form-signin-heading"><i class="material-icons">https</i> Please sign in</h2>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>

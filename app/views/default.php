@@ -19,6 +19,7 @@ use app\config;
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -50,7 +51,8 @@ use app\config;
 				force_br_newlines : true,
 	      force_p_newlines : true,
 	      forced_root_block : '',
-        extended_valid_elements : 'class, style, a[href|onclick|target|rel|title]',
+        valid_children : "+body[class|main|role|style]",
+        extended_valid_elements : 'main[class|style|role], class, style, role, a[href|onclick|target|rel|title]',
 			 });
 			 </script>
 
@@ -93,10 +95,10 @@ use app\config;
 
     <main role="main" class="container">
 
-      <?php
-        // View
-        \core\view::render($file, $args);
-      ?>
+    <?php
+      // View
+      \core\view::render($file, $args);
+    ?>
 
     </main><!-- /.container -->
 
