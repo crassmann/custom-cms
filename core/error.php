@@ -51,7 +51,7 @@ class error
         echo "<p>Stack trace:<pre>" . $exception->getTraceAsString() . "</pre></p>";
         echo "<p>Thrown in '" . $exception->getFile() . "' on line " . $exception->getLine() . "</p>";
       } else {
-        $log = dirname(__DIR__) . '/'.config::ROOT_APP_DIR.'/' . date('Y-m-d') . '.txt';
+        $log = dirname(__DIR__) . config::LOG_DIR . date('Y-m-d') . '.txt';
         ini_set('error_log', $log);
 
         $message = "Uncaught exception: '" . get_class($exception) . "'";

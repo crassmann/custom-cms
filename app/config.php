@@ -67,7 +67,7 @@ class config
      * Set log dir to log error messages if SHOW_ERRORS = false
      * @var string
      */
-    const LOG_DIR = 'bin/app/logs'; // Dir to log errors if SHOW_ERRORS = false
+    const LOG_DIR = '/bin/app/logs/'; // Dir to log errors if SHOW_ERRORS = false
 
     /**
      * Set the default template

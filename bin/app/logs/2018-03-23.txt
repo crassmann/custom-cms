@@ -1,0 +1,19 @@
+[23-Mar-2018 19:12:29 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 [internal function]: app\controllers\page->showAction()
+#1 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#2 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#3 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('asd')
+#4 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/controllers/page.php' on line 37
+[23-Mar-2018 19:13:03 UTC] Uncaught exception: 'Exception' with message 'Controller class app\controllers\admin\asd not found'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('asd/asd/asd')
+#1 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 120
+[23-Mar-2018 19:14:14 UTC] Uncaught exception: 'Exception' with message 'Controller class app\controllers\admin\asd not found'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('asd/asd/asd')
+#1 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 120
+[23-Mar-2018 19:14:15 UTC] Uncaught exception: 'Exception' with message 'Controller class app\controllers\admin\asd not found'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('asd/asd/favicon...')
+#1 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 120
