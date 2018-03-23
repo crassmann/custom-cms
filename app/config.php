@@ -61,13 +61,13 @@ class config
      * Show or hide error messages on screen
      * @var boolean
      */
-    const SHOW_ERRORS = true; // false
+    const SHOW_ERRORS = false; // true
 
     /**
      * Set log dir to log error messages if SHOW_ERRORS = false
      * @var string
      */
-    const LOG_DIR = 'logs/app'; // Dir to log errors if SHOW_ERRORS = false
+    const LOG_DIR = 'bin/app/logs'; // Dir to log errors if SHOW_ERRORS = false
 
     /**
      * Set the default template

@@ -106,7 +106,7 @@ use app\config;
     <?php
       // Footer view
       if (!isset($args['namespace']) || $args['namespace'] != 'admin') {
-        if ($args['request'] != 'login') {
+        if (isset($args['request']) && $args['request'] != 'login') {
           \core\view::render('footer', $args);
         }
       }
