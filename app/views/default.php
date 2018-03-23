@@ -35,6 +35,7 @@ use app\config;
 			  selector: 'textarea',
 				theme: 'modern',
 			  height: 500,
+        content_css : "<?php echo config::ROOT_APP_DIR; ?>app/assets/css/style.css,https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js",
 			  plugins: [
 			    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
 			    'searchreplace wordcount visualblocks visualchars code fullscreen',
@@ -51,8 +52,8 @@ use app\config;
 				force_br_newlines : true,
 	      force_p_newlines : true,
 	      forced_root_block : '',
-        valid_children : "+body[class|main|role|style]",
-        extended_valid_elements : 'main[class|style|role], class, style, role, a[href|onclick|target|rel|title]',
+        valid_children : "+body[class|main|role|style|small",
+        extended_valid_elements : 'main[class|style|role], class, small, style, role, a[href|onclick|target|rel|title]',
 			 });
 			 </script>
 
@@ -105,12 +106,15 @@ use app\config;
     <?php
       // Footer view
       if (!isset($args['namespace']) || $args['namespace'] != 'admin') {
-        \core\view::render('footer', $args);
+        if ($args['request'] != 'login') {
+          \core\view::render('footer', $args);
+        }
       }
     ?>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
   </body>
 </html>

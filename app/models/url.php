@@ -35,6 +35,28 @@ class url extends \core\model
   }
 
   /**
+   * Get a url by URL
+   *
+   * @param String $url  The url
+   *
+   * @return array
+   */
+  public static function getUrlById($id) {
+    $db = static::getDB();
+    $stmt = $db->prepare("SELECT * FROM urls WHERE id = :id LIMIT 1");
+    try {
+      $stmt->execute( array(':id' => $id) );
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        return $result;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
    * Get all urls as an associative array
    *
    * @return array

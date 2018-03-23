@@ -109,9 +109,14 @@ class url extends \app\controllers\url
     if (isset($_POST["delete"])) {
       $url = new \app\models\url();
       $page = new \app\models\page();
+      $navi = new \app\models\navigation();
       if ($this->route_params['url'] = $url::deleteURL($_POST["delete"])) {
         if ($this->route_params['url'] = $page::deleteByURL($_POST["delete"])) {
-          header("Location: ".config::ROOT_APP_DIR."url/index/");
+          if ($this->route_params['url'] = $navi::deleteByURL($_POST["delete"])) {
+            header("Location: ".config::ROOT_APP_DIR."url/index/");
+          } else {
+            $this->errorAction();
+          }
         } else {
           $this->errorAction();
         }

@@ -33,7 +33,7 @@ use app\config;
         echo "<td><input type=\"number\" id=\"position\" name=\"".$item["navi_id"]."[position]\" value=\"".$item["position"]."\" required></td>";
         echo "<td><input type=\"number\" id=\"parent\" name=\"".$item["navi_id"]."[parent]\" value=\"".$item["parent"]."\" required></td>";
         echo "<td><input type=\"number\" id=\"child_position\" name=\"".$item["navi_id"]."[child_position]\" value=\"".$item["child_position"]."\" required></td>";
-        echo "<td><button type=\"submit\" id=\"deleteItem\" name=\"deleteItem\" value=\"".$item["navi_id"]."\" class=\"close\"><span aria-hidden=\"true\">&times;</span></button></td>";
+        echo "<td><button type=\"submit\" id=\"deleteItem\" name=\"deleteItem\" value=\"".$item["navi_id"]."\" class=\"close\"><i class=\"material-icons\">close</i></button></td>";
         echo "</tr><tr>";
         }
         ?>

@@ -41,7 +41,9 @@ class item extends \core\model
    */
   public static function getItems() {
     $db = static::getDB();
-    $stmt = $db->query('SELECT * FROM items WHERE 1');
+    $sql = "SELECT items.id, items.name, COUNT(pages.page_id) AS count_pages, items.date_created, items.user_id, items.date_modified, items.modified_by FROM `items`\n"
+        . "LEFT JOIN pages ON pages.item_id = items.id\n"
+        . "GROUP BY items.id";    $stmt = $db->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 

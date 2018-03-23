@@ -56,6 +56,8 @@ class page extends \app\controllers\page
         }
       }
 
+      $url = new \app\models\url();
+      $this->route_params['url'] = $url::getUrlById($this->route_params['request']);
       $item = new \app\models\item();
       $this->route_params['item'] = $item::getItems();
       if ($this->route_params['items'] = $page::getPageItems($this->route_params['request'])) {

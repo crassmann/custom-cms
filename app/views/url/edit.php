@@ -15,6 +15,7 @@ use app\config;
           <th>Id</th>
           <th>Name</th>
           <th>Position</th>
+          <th>ge&auml;ndert</th>
           <th>&nbsp;</th>
         </tr>
       </thead>

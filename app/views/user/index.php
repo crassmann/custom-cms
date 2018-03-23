@@ -45,7 +45,7 @@ use app\models\auth;
           echo "-";
         }
         echo "</td>";
-        echo "<td><button type=\"submit\" class=\"close\" name=\"deleteUser\" value=\"".$user["id"]."\" id=\"".$user["id"]."\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></td>";
+        echo "<td><button type=\"submit\" class=\"close\" name=\"deleteUser\" value=\"".$user["id"]."\" id=\"".$user["id"]."\" aria-label=\"Close\"><i class=\"material-icons\">close</i></button></td>";
         echo "</tr><tr>";
         }
         ?>

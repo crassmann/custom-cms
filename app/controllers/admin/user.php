@@ -13,7 +13,6 @@ use \core\view;
  */
 class user extends \app\controllers\user
 {
-
   /**
    * Show the user index page
    *

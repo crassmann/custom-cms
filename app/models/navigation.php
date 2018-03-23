@@ -140,5 +140,27 @@ class navigation extends \core\model
       return false;
     }
   }
+
+  /**
+   * Deletes an item by URL id
+   *
+   * @param Int $id  The url id
+   *
+   * @return array
+   */
+  public static function deleteByURL($url_id) {
+    $db = static::getDB();
+    $sql = "DELETE FROM `navigation_items` WHERE `pid` = :url_id";
+    $stmt = $db->prepare($sql);
+    try {
+      if ($stmt->execute( array(':url_id' => $url_id) )) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
 }
 ?>

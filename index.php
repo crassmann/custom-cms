@@ -25,8 +25,8 @@ $router = new core\router();
 
 // Add the routes
 //$router->add('{request:(^$)}', ['controller' => 'page', 'action' => 'show']);
-$router->add('login(.*)', ['controller' => 'user', 'action' => 'login', 'template' => 'default']);
-$router->add('logout(.*)', ['controller' => 'user', 'action' => 'logout']);
+$router->add('{request:login(.*)}', ['controller' => 'user', 'action' => 'login', 'template' => 'default']);
+$router->add('{request:logout(.*)}', ['controller' => 'user', 'action' => 'logout']);
 $router->add('{controller}/{action}/{request:(.*)}', ['namespace' => 'admin']);
 $router->add('{request:(.*)}', ['controller' => 'page', 'action' => 'show', 'template' => 'page']);
 // $router->add('{request:([a-z0-9\-]+)}', ['controller' => 'page', 'action' => 'show']);
