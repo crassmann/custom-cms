@@ -29,6 +29,23 @@ abstract class controller extends app
     public function __construct($route_params) {
       $this->route_params = $route_params;
       $this->session = new session();
+
+      $navigation = new \app\models\navigation();
+      $header_navigation = $navigation::getNavigation(1, 0);
+      foreach ($header_navigation as $key => $value) {
+        if ($childs = $navigation::getNavigation(1, $value['pid'])) {
+          $header_navigation[$key]['childs'] = $childs;
+        }
+      }
+      $this->route_params['header-navigation'] = $header_navigation;
+
+      $footer_navigation = $navigation::getNavigation(2, 0);
+      foreach ($footer_navigation as $key => $value) {
+        if ($childs = $navigation::getNavigation(2, $value['pid'])) {
+          $footer_navigation[$key]['childs'] = $childs;
+        }
+      }
+      $this->route_params['footer-navigation'] = $footer_navigation;
     }
 
     /**
@@ -84,6 +101,7 @@ abstract class controller extends app
      */
     public function errorAction($code = 404)
     {
-      view::renderTemplate(config::DEFAULT_TEMPLATE, $code, $this->route_params);
+      throw new \Exception('Error code: '.$code, $code);
+      // view::renderTemplate(config::DEFAULT_TEMPLATE, $code, $this->route_params);
     }
 }

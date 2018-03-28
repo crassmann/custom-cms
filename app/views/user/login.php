@@ -8,7 +8,10 @@
     echo "</div>";
   }
   ?>
-  <h2 class="form-signin-heading"><i class="material-icons">https</i> Please sign in</h2>
+  <div class="text-center">
+    <i class="material-icons md-36">https</i>
+    <h2 class="form-signin-heading">Please sign in</h2>
+  </div>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
@@ -18,7 +21,7 @@
       <input type="checkbox" id="inputCheckbox" name="rememberMe" value="remember-me"> Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-primary" name="submit" type="submit">Sign in</button>
+  <button class="btn btn-lg btn-secondary" name="submit" type="submit">Sign in</button>
 </form>
 
 <script>

@@ -42,7 +42,7 @@ class navigation extends \core\model
    *
    * @return array or false
    */
-  public static function getNavigation($nid) {
+  public static function getNavigation($nid, $parent = 0) {
     $db = static::getDB();
     $sql = 'SELECT * FROM `urls`'
           . ' JOIN `navigation_items`'
@@ -53,7 +53,37 @@ class navigation extends \core\model
     $stmt = $db->prepare($sql);
     $params = array(
       ':nid' => $nid,
-      ':parent' => 0,
+      ':parent' => $parent,
+    );
+    try {
+      $stmt->execute( $params );
+      if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+        return $result;
+      } else {
+        return false;
+      }
+    } catch (\Exception $e) {
+      return $e;
+    }
+  }
+
+  /**
+   * Get Navigation
+   *
+   * @param Int $nid  The navigation id
+   *
+   * @return array or false
+   */
+  public static function getNavigationItems($nid) {
+    $db = static::getDB();
+    $sql = 'SELECT * FROM `urls`'
+          . ' JOIN `navigation_items`'
+          . ' ON `navigation_items`.`pid` = `urls`.`id`'
+          . ' WHERE `navigation_items`.`nid` = :nid'
+          . ' ORDER BY `position` ASC';
+    $stmt = $db->prepare($sql);
+    $params = array(
+      ':nid' => $nid,
     );
     try {
       $stmt->execute( $params );
@@ -104,12 +134,15 @@ class navigation extends \core\model
    *
    * @return array
    */
-  public static function updateNavigationItem($navi_id, $position) {
+  public static function updateNavigationItem($field, $navi_id, $value) {
     $db = static::getDB();
-    $sql = "UPDATE `navigation_items` SET `position` = :position WHERE `navigation_items`.`navi_id` = :navi_id";
+    $sql = "UPDATE `navigation_items` SET `$field` = :value WHERE `navigation_items`.`navi_id` = :navi_id";
     $stmt = $db->prepare($sql);
     try {
-      if ($stmt->execute( array(':position' => $position, ':navi_id' => $navi_id) )) {
+      if ($stmt->execute( array(
+      ':value' => $value,
+      ':navi_id' => $navi_id,
+      ) )) {
         return true;
       } else {
         return false;

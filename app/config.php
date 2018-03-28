@@ -61,7 +61,7 @@ class config
      * Show or hide error messages on screen
      * @var boolean
      */
-    const SHOW_ERRORS = false; // true
+    const SHOW_ERRORS = true; // false
 
     /**
      * Set log dir to log error messages if SHOW_ERRORS = false

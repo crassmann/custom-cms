@@ -1,5 +1,10 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -25,6 +30,9 @@ h1 {
   background-color: #f5f5f5;
 }
 
+i{
+  vertical-align: bottom;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -152,16 +160,56 @@ code {
   * Extra utilities
   */
 
- .border-top { border-top: 1px solid #e5e5e5; }
- .border-bottom { border-bottom: 1px solid #e5e5e5; }
+  .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
 
- .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+  .nav-scroller .nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    color: rgba(255, 255, 255, .75);
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
 
- .flex-equal > * {
-   -ms-flex: 1;
-   -webkit-box-flex: 1;
-   flex: 1;
- }
+  .nav-underline .nav-link {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: .875rem;
+    color: var(--secondary);
+  }
+
+  .nav-underline .nav-link:hover {
+    color: var(--blue);
+  }
+
+  .nav-underline .active {
+    font-weight: 500;
+    color: var(--gray-dark);
+  }
+
+  .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+  .border-top { border-top: 1px solid #e5e5e5; }
+  .border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+  .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+  .flex-equal > * {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+  }
  @media (min-width: 768px) {
    .flex-md-equal > * {
      -ms-flex: 1;

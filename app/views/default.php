@@ -35,7 +35,7 @@ use app\config;
 			  selector: 'textarea',
 				theme: 'modern',
 			  height: 500,
-        content_css : "<?php echo config::ROOT_APP_DIR; ?>app/assets/css/style.css,https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js",
+        content_css : "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js, <?php echo config::ROOT_APP_DIR; ?>app/assets/css/style.css",
 			  plugins: [
 			    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
 			    'searchreplace wordcount visualblocks visualchars code fullscreen',
@@ -91,7 +91,7 @@ use app\config;
 
     <?php
       // Navigation view
-      \core\view::render('navigation', $args);
+      \core\view::render('header-navigation', $args);
     ?>
 
     <main role="main" class="container">
@@ -107,7 +107,7 @@ use app\config;
       // Footer view
       if (!isset($args['namespace']) || $args['namespace'] != 'admin') {
         if (isset($args['request']) && $args['request'] != 'login') {
-          \core\view::render('footer', $args);
+          \core\view::render('footer-navigation', $args);
         }
       }
     ?>

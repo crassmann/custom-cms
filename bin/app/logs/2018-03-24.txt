@@ -1,0 +1,10 @@
+[24-Mar-2018 12:07:50 UTC] Uncaught exception: 'Exception' with message '/Users/christian/Sites/projects/custom-cms/app/views/navigation.php not found'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/views/page.php(68): core\view::render('navigation', Array)
+#1 /Users/christian/Sites/projects/custom-cms/core/view.php(47): require_once('/Users/christia...')
+#2 /Users/christian/Sites/projects/custom-cms/app/controllers/page.php(27): core\view::renderTemplate('page', 'page/show', Array)
+#3 [internal function]: app\controllers\page->showAction()
+#4 /Users/christian/Sites/projects/custom-cms/core/controller.php(53): call_user_func_array(Array, Array)
+#5 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#6 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('')
+#7 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/view.php' on line 30

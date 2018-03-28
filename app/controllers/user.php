@@ -22,7 +22,7 @@ class user extends \core\controller
   public function loginAction()
   {
     if (isset($_SESSION['userId'])) {
-      header("Location: ".config::ROOT_APP_DIR."item/index/");
+      header("Location: ".config::ROOT_APP_DIR."url/index/");
       exit;
     }
 
@@ -36,7 +36,7 @@ class user extends \core\controller
             $_SESSION['userId'] = $auth_token['user_id'];
             $_SESSION['userName'] = $user['name'];
             $u::updateLastLogin($auth_token['user_id']);
-            header("Location: ".config::ROOT_APP_DIR."item/index/");
+            header("Location: ".config::ROOT_APP_DIR."url/index/");
           } else {
             $error[] = 'Error while adding Auth Token. Please contact the administrator.';
           }
@@ -67,12 +67,12 @@ class user extends \core\controller
             if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
               $auth = new \app\models\auth();
               if ($auth::addAuth($this->route_params['user']['id'])) {
-                header("Location: ".config::ROOT_APP_DIR."item/index/");
+                header("Location: ".config::ROOT_APP_DIR."url/index/");
               } else {
                 $error[] = "Remember Me Error";
               }
             }
-            header("Location: ".config::ROOT_APP_DIR."item/index/");
+            header("Location: ".config::ROOT_APP_DIR."url/index/");
           } else {
             $error[] = "Account closed due to too many login attempts!";
           }

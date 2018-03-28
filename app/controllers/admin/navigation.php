@@ -47,14 +47,20 @@ class navigation extends \core\controller
       }
       // If the save form is submitted
       if (isset($_POST["save"])) {
-        $this->route_params['navi'] = $navigation::getNavigation($this->route_params['request']);
+        $this->route_params['navi'] = $navigation::getNavigationItems($this->route_params['request']);
         foreach ($this->route_params['navi'] as $key => $value) {
           if ($value['position'] != $_POST[$value['navi_id']]['position']) {
-            $navigation::updateNavigationItem($value['navi_id'], $_POST[$value['navi_id']]['position']);
+            $navigation::updateNavigationItem('position', $value['navi_id'], $_POST[$value['navi_id']]['position']);
+          }
+          if ($value['parent'] != $_POST[$value['navi_id']]['parent']) {
+            $navigation::updateNavigationItem('parent', $value['navi_id'], $_POST[$value['navi_id']]['parent']);
+          }
+          if ($value['child_position'] != $_POST[$value['navi_id']]['child_position']) {
+            $navigation::updateNavigationItem('child_position', $value['navi_id'], $_POST[$value['navi_id']]['child_position']);
           }
         }
       }
-      if ($this->route_params['navi'] = $navigation::getNavigation($this->route_params['request'])) {
+      if ($this->route_params['navi'] = $navigation::getNavigationItems($this->route_params['request'])) {
         if ($this->route_params['pages'] = $page::getPages()) {
           view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
         }

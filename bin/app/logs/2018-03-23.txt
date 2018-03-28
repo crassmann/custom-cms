@@ -17,3 +17,111 @@ Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 1
 Stack trace: #0 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('asd/asd/favicon...')
 #1 {main}
 Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 120
+[23-Mar-2018 20:10:06 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 [internal function]: app\controllers\page->showAction()
+#1 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#2 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#3 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('ted')
+#4 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/controllers/page.php' on line 37
+[23-Mar-2018 20:10:12 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 [internal function]: app\controllers\page->showAction()
+#1 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#2 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#3 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('ted')
+#4 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/controllers/page.php' on line 37
+[23-Mar-2018 20:14:57 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 [internal function]: app\controllers\page->showAction()
+#1 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#2 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#3 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('tezus')
+#4 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/controllers/page.php' on line 37
+[23-Mar-2018 20:15:03 UTC] Uncaught exception: 'Exception' with message 'Controller class app\controllers\admin\tezus not found'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('tezus/asd/as')
+#1 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 120
+[23-Mar-2018 20:15:03 UTC] Uncaught exception: 'Exception' with message 'Controller class app\controllers\admin\tezus not found'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('tezus/asd/favic...')
+#1 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/router.php' on line 120
+[23-Mar-2018 20:16:22 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 [internal function]: app\controllers\page->showAction()
+#1 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#2 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#3 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('albums')
+#4 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/controllers/page.php' on line 37
+[23-Mar-2018 20:17:24 UTC] Uncaught exception: 'Exception' with message 'Error code: 404'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/controllers/item.php(26): core\controller->errorAction()
+#1 [internal function]: app\controllers\item->showAction()
+#2 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#4 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('item/show/favic...')
+#5 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/controller.php' on line 87
+[23-Mar-2018 20:17:29 UTC] Uncaught exception: 'Exception' with message 'Error code: 404'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/controllers/item.php(26): core\controller->errorAction()
+#1 [internal function]: app\controllers\item->showAction()
+#2 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('show', Array)
+#4 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('item/show/20')
+#5 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/controller.php' on line 87
+[23-Mar-2018 20:33:06 UTC] Uncaught exception: 'Exception' with message 'Error code: 404'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/controllers/admin/navigation.php(62): core\controller->errorAction()
+#1 [internal function]: app\controllers\admin\navigation->editAction()
+#2 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('edit', Array)
+#4 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('navigation/edit...')
+#5 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/controller.php' on line 87
+[23-Mar-2018 21:49:46 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: page_id'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php(33): core\error::errorHandler(8, 'Undefined index...', '/Users/christia...', 33, Array)
+#1 /Users/christian/Sites/projects/custom-cms/core/view.php(28): require('/Users/christia...')
+#2 /Users/christian/Sites/projects/custom-cms/app/views/default.php(101): core\view::render('navigation/edit', Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/view.php(47): require_once('/Users/christia...')
+#4 /Users/christian/Sites/projects/custom-cms/app/controllers/admin/navigation.php(59): core\view::renderTemplate('default', 'navigation/edit', Array)
+#5 [internal function]: app\controllers\admin\navigation->editAction()
+#6 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#7 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('edit', Array)
+#8 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('navigation/edit...')
+#9 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php' on line 33
+[23-Mar-2018 21:49:51 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: page_id'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php(33): core\error::errorHandler(8, 'Undefined index...', '/Users/christia...', 33, Array)
+#1 /Users/christian/Sites/projects/custom-cms/core/view.php(28): require('/Users/christia...')
+#2 /Users/christian/Sites/projects/custom-cms/app/views/default.php(101): core\view::render('navigation/edit', Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/view.php(47): require_once('/Users/christia...')
+#4 /Users/christian/Sites/projects/custom-cms/app/controllers/admin/navigation.php(59): core\view::renderTemplate('default', 'navigation/edit', Array)
+#5 [internal function]: app\controllers\admin\navigation->editAction()
+#6 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#7 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('edit', Array)
+#8 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('navigation/edit...')
+#9 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php' on line 33
+[23-Mar-2018 21:50:32 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: page_id'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php(33): core\error::errorHandler(8, 'Undefined index...', '/Users/christia...', 33, Array)
+#1 /Users/christian/Sites/projects/custom-cms/core/view.php(28): require('/Users/christia...')
+#2 /Users/christian/Sites/projects/custom-cms/app/views/default.php(101): core\view::render('navigation/edit', Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/view.php(47): require_once('/Users/christia...')
+#4 /Users/christian/Sites/projects/custom-cms/app/controllers/admin/navigation.php(59): core\view::renderTemplate('default', 'navigation/edit', Array)
+#5 [internal function]: app\controllers\admin\navigation->editAction()
+#6 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#7 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('edit', Array)
+#8 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('navigation/edit...')
+#9 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php' on line 33
+[23-Mar-2018 21:50:48 UTC] Uncaught exception: 'ErrorException' with message 'Undefined index: page_id'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php(33): core\error::errorHandler(8, 'Undefined index...', '/Users/christia...', 33, Array)
+#1 /Users/christian/Sites/projects/custom-cms/core/view.php(28): require('/Users/christia...')
+#2 /Users/christian/Sites/projects/custom-cms/app/views/default.php(101): core\view::render('navigation/edit', Array)
+#3 /Users/christian/Sites/projects/custom-cms/core/view.php(47): require_once('/Users/christia...')
+#4 /Users/christian/Sites/projects/custom-cms/app/controllers/admin/navigation.php(59): core\view::renderTemplate('default', 'navigation/edit', Array)
+#5 [internal function]: app\controllers\admin\navigation->editAction()
+#6 /Users/christian/Sites/projects/custom-cms/core/controller.php(49): call_user_func_array(Array, Array)
+#7 /Users/christian/Sites/projects/custom-cms/core/router.php(115): core\controller->__call('edit', Array)
+#8 /Users/christian/Sites/projects/custom-cms/index.php(46): core\router->dispatch('navigation/edit...')
+#9 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/app/views/navigation/edit.php' on line 33

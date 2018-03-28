@@ -20,9 +20,6 @@ class page extends \core\controller
    */
   public function showAction()
   {
-    $navigation = new \app\models\navigation();
-    $this->route_params['navigation'] = $navigation::getNavigation(1);
-
     $url = new \app\models\url();
     $page = new \app\models\page();
     if ($this->route_params['url'] = $url::getURL($this->route_params['request'])) {
@@ -34,7 +31,7 @@ class page extends \core\controller
         view::renderTemplate($this->route_params['template'], $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
       }
     } else {
-      throw new \Exception('No route matched.', 404);
+      $this->errorAction();
     }
   }
 

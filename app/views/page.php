@@ -65,14 +65,14 @@ use app\config;
 
     <?php
       // Navigation view
-      \core\view::render('navigation', $args);
+      \core\view::render('header-navigation', $args);
 
       // View
       \core\view::render($file, $args);
 
       // Footer view
       if (!isset($args['namespace']) || $args['namespace'] != 'admin') {
-        \core\view::render('footer', $args);
+        \core\view::render('footer-navigation', $args);
       }
     ?>
 

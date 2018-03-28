@@ -20,7 +20,7 @@ class item extends \app\controllers\item
   public function indexAction() {
     $item = new \app\models\item();
     if ($this->route_params['item'] = $item::getItems()) {
-      view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+      view::renderTemplate($this->route_params['template'], $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
     } else {
       $this->errorAction();
     }
