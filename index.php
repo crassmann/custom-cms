@@ -24,7 +24,6 @@ set_exception_handler('core\error::exceptionHandler');
 $router = new core\router();
 
 // Add the routes
-//$router->add('{request:(^$)}', ['controller' => 'page', 'action' => 'show']);
 $router->add('{request:login(.*)}', ['controller' => 'user', 'action' => 'login', 'template' => 'default']);
 $router->add('{request:logout(.*)}', ['controller' => 'user', 'action' => 'logout']);
 $router->add('{controller}/{action}/{request:(.*)}', ['namespace' => 'admin', 'template' => 'default']);

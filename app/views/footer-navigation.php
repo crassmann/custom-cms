@@ -16,7 +16,7 @@ use app\config;
     if (isset($args['footer-navigation'])) {
       foreach ($args['footer-navigation'] as $key => $value) {
         echo "
-        <div class=\"col\">
+        <div class=\"col-6 col-md\">
           <h5><a class=\"text-dark\" href=\"".$value['url']."\">".$value['name']."</a></h5>
         ";
         if (isset($value['childs'])) {
