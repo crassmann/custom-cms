@@ -1,3 +1,3 @@
 <?php
-echo $args['url']['url'];
+echo $args['url']['content'];
 ?>

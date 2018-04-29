@@ -35,7 +35,6 @@ class navigation extends \core\controller
 
     if ( isset($this->route_params['request']) ) {
       $navigation = new \app\models\navigation();
-      $page = new \app\models\page();
       // If the delete form is submitted
       if (isset($_POST["deleteItem"])) {
         $this->route_params['deleteItem'] = $_POST["deleteItem"];

@@ -63,8 +63,7 @@ class url extends \core\model
    */
   public static function getURLs() {
     $db = static::getDB();
-    $sql = "SELECT urls.id, urls.name, urls.url, COUNT(pages.item_id) AS items, urls.date_created, urls.user_id, urls.date_modified, urls.modified_by FROM `urls`\n"
-        . "LEFT JOIN pages ON pages.url_id = urls.id\n"
+    $sql = "SELECT * FROM `urls`\n"
         . "WHERE 1\n"
         . "GROUP BY urls.id";
     $stmt = $db->query($sql);

@@ -7,7 +7,10 @@ use app\config;
 ?>
 
 <h1>URL Index</h1>
-<div class="table-responsive">
+<div class="mb-5">
+  <a href="<?php echo config::ROOT_APP_DIR; ?>url/new/" class="btn btn-primary btn-lg" role="button">+ NEUE URL ANLEGEN</a>
+</div>
+<div class="table-responsive rounded box-shadow">
   <form id="delete-url-form" action="<?php echo config::ROOT_APP_DIR."url/delete/"; ?>" method="post">
     <table class="table table-striped">
       <thead>
@@ -15,7 +18,6 @@ use app\config;
           <th>Id</th>
           <th>Name</th>
           <th>URL</th>
-          <th>Items</th>
           <th>erstellt</th>
           <th>von</th>
           <th>ge&auml;ndert</th>
@@ -32,7 +34,6 @@ use app\config;
         echo "<td>".$url["id"]."</td>";
         echo "<td><a href=\"".config::ROOT_APP_DIR."page/edit/".$url["id"]."\">".$url["name"]."</a></td>";
         echo "<td>/".$url["url"]."</td>";
-        echo "<td>".$url["items"]."</td>";
         echo "<td>".$url["date_created"]."</td>";
         echo "<td>".$url["user_id"]."</td>";
         echo "<td>".$url["date_modified"]."</td>";
@@ -48,4 +49,3 @@ use app\config;
     </table>
   </form>
 </div>
-<a href="<?php echo config::ROOT_APP_DIR; ?>url/new/" class="btn btn-primary" role="button">Neue URL anlegen</a>

@@ -6,14 +6,14 @@ use app\config;
 
 ?>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-between">
+<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo config::ROOT_APP_DIR; ?>">MVC Master</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand mb-0 h1" href="<? echo config::ROOT_APP_DIR; ?>"><span class="font-weight-bold text-dark">krypt</span><span class=" text-secondary">open<span></a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="navbar-collapse offcanvas-collapse" id="offcanvas">
       <ul class="navbar-nav mr-auto">
         <?php
         if (isset($args['header-navigation'])) {
@@ -48,9 +48,10 @@ use app\config;
         }
         ?>
       </ul>
-      <!-- <form class="form-inline my-2 my-md-0">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      </form> -->
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>
@@ -58,7 +59,7 @@ use app\config;
 <?php
 if (isset($_SESSION['userId'])) {
   echo "
-      <nav class='navbar navbar-expand-md navbar-light bg-light'>
+      <nav class='navbar navbar-expand-md navbar-light bg-light pt-5'>
       <div class='container'>
       <ul class='nav navbar-nav justify-content-end'>
         <li class='nav-item'>
