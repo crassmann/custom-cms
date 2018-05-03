@@ -31,9 +31,9 @@ use app\config;
       \core\view::render('header-navigation', $args);
     ?>
 
-    <div class="jumbotron jumbotron-fluid bg-dark text-light">
+    <div class="jumbotron jumbotron-fluid bg-dark text-light" style="margin-bottom: 0px;">
       <div class="container">
-        <h1 class="display-4"><?php echo $args['url']['headline']; ?></h1>
+        <p class="display-4"><?php echo $args['url']['headline']; ?></p>
       </div>
     </div>
 
@@ -41,8 +41,7 @@ use app\config;
       <div class="container">
         <ol class="breadcrumb bg-light px-0">
           <li class="breadcrumb-item"><a class="text-dark" href="#"><em class="material-icons">home</em></a></li>
-          <li class="breadcrumb-item"><a class="text-dark" href="#">Glossar</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Blockchain</li>
+          <li class="breadcrumb-item"><a class="text-dark" href="#"><?php echo $args['url']['name']; ?></a></li>
         </ol>
       </div>
     </nav>
@@ -50,6 +49,7 @@ use app\config;
     <main role="main" class="container">
       <?php
         // View
+        echo "<h1>".$args['url']['subline']."</h1>";
         \core\view::render($file, $args);
       ?>
 

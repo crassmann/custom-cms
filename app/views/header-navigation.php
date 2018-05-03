@@ -48,6 +48,35 @@ use app\config;
         }
         ?>
       </ul>
+      <?php
+      if (isset($_SESSION['userId'])) {
+        echo "
+            <ul class='nav navbar-nav justify-content-end'>
+            <li class='nav-item'>
+              <a class='nav-link' href=\"".config::ROOT_APP_DIR."template/index/\"><i class='material-icons'>content_copy</i> Templates</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href=\"".config::ROOT_APP_DIR."url/index/\"><i class='material-icons'>link</i> URLs</a>
+            </li>
+              <li class='nav-item'>
+                <a class='nav-link' href=\"".config::ROOT_APP_DIR."navigation/index/\"><i class='material-icons'>menu</i> Navi</a>
+              </li>
+              <li class=\"nav-item dropdown\">
+                <a class=\"nav-link dropdown-toggle\" href=\"".config::ROOT_APP_DIR."user/index/\" id=\"navDropDownUser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class='material-icons md-10'>face</i> User</a>
+                <div class=\"dropdown-menu\" aria-labelledby=\"dropdownUser\">
+                  <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/index/\">Index</a>
+                  <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/edit/".$_SESSION['userId']."\">Edit ".$_SESSION['userName']."</a>
+                  <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/new/\">New User</a>
+                  <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."logout\">Logout</a>
+                </div>
+              </li>
+            </ul>
+        ";
+      }
+      // echo "<pre>";
+      // var_dump($args['header-navigation']);
+      // echo "</pre>";
+      ?>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
@@ -56,36 +85,3 @@ use app\config;
   </div>
 </nav>
 <!-- End Navbar -->
-<?php
-if (isset($_SESSION['userId'])) {
-  echo "
-      <nav class='navbar navbar-expand-md navbar-light bg-light pt-5'>
-      <div class='container'>
-      <ul class='nav navbar-nav justify-content-end'>
-        <li class='nav-item'>
-          <a class='nav-link' href=\"".config::ROOT_APP_DIR."item/index/\"><i class='material-icons'>note</i> Items</a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href=\"".config::ROOT_APP_DIR."url/index/\"><i class='material-icons'>link</i> URLs</a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href=\"".config::ROOT_APP_DIR."navigation/index/\"><i class='material-icons'>menu</i> Navi</a>
-        </li>
-        <li class=\"nav-item dropdown\">
-          <a class=\"nav-link dropdown-toggle\" href=\"".config::ROOT_APP_DIR."user/index/\" id=\"navDropDownUser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class='material-icons md-10'>face</i> User</a>
-          <div class=\"dropdown-menu\" aria-labelledby=\"dropdownUser\">
-            <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/index/\">Index</a>
-            <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/edit/".$_SESSION['userId']."\">Edit ".$_SESSION['userName']."</a>
-            <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."user/new/\">New User</a>
-            <a class=\"dropdown-item\" href=\"".config::ROOT_APP_DIR."logout\">Logout</a>
-          </div>
-        </li>
-      </ul>
-      </div>
-      </nav>
-  ";
-}
-// echo "<pre>";
-// var_dump($args['header-navigation']);
-// echo "</pre>";
-?>

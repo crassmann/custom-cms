@@ -33,6 +33,7 @@ class url extends \app\controllers\url
    * @return void
    */
   public function newAction() {
+    $url = new \app\models\url();
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "add") {
 
@@ -40,7 +41,6 @@ class url extends \app\controllers\url
       foreach ($_POST as $key => $value) {
         $post[$key] = trim($value); // trim the user input
       }
-      $url = new \app\models\url();
       if ($this->route_params['url'] = $url::new($post)) {
         header("Location: ".config::ROOT_APP_DIR."url/edit/".$post['url']);
       } else {
@@ -48,6 +48,7 @@ class url extends \app\controllers\url
       }
 
     } else {
+      $this->route_params['templates'] = $url::getTemplates();
       view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/new', $this->route_params);
     }
   }
@@ -60,6 +61,7 @@ class url extends \app\controllers\url
   public function editAction() {
     $url = new \app\models\url();
     $this->route_params['url'] = $url::getURL($this->route_params['request']);
+    $this->route_params['templates'] = $url::getTemplates();
 
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "edit") {
@@ -89,7 +91,7 @@ class url extends \app\controllers\url
       }
 
     }
-    view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/new', $this->route_params);
+    view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/edit', $this->route_params);
 
   }
 

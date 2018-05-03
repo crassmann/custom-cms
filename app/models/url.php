@@ -21,7 +21,10 @@ class url extends \core\model
    */
   public static function getURL($url) {
     $db = static::getDB();
-    $stmt = $db->prepare("SELECT * FROM urls WHERE url = :url LIMIT 1");
+    $sql = "SELECT * FROM `urls`\n"
+    . "JOIN templates ON urls.template_id = templates.template_id\n"
+    . "WHERE url = :url LIMIT 1";
+    $stmt = $db->prepare($sql);
     try {
       $stmt->execute( array(':url' => $url) );
       if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -64,37 +67,10 @@ class url extends \core\model
   public static function getURLs() {
     $db = static::getDB();
     $sql = "SELECT * FROM `urls`\n"
-        . "WHERE 1\n"
-        . "GROUP BY urls.id";
+    . "JOIN templates ON urls.template_id = templates.template_id\n"
+    . "WHERE 1";
     $stmt = $db->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  /**
-   * Gets all pages
-   *
-   * @param Int $id  The url id
-   *
-   * @return array
-   */
-  public static function getURLItems() {
-    $db = static::getDB();
-    $sql = "SELECT url_id, COUNT(item_id) AS items FROM `pages`\n"
-        . "JOIN urls ON urls.id = url_id\n"
-        . "WHERE 1 GROUP BY url_id";
-    try {
-      if ($stmt = $db->query($sql)) {
-        if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-          return $result;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    } catch (\Exception $e) {
-      return false;
-    }
   }
 
   /**
@@ -106,12 +82,16 @@ class url extends \core\model
    */
   public static function new($url) {
     $db = static::getDB();
-    $sql = "INSERT INTO `urls` (`id`, `name`, `display_name`, `url`, `user_id`, `meta_title`, `meta_desc`, `meta_keywords`, `meta_robots`, `date_created`, `date_modified`, `modified_by`) VALUES (NULL, :name, :display_name, :url, :user_id, :meta_title, :meta_desc, :meta_keywords, :meta_robots, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :modified_by)";
+    $sql = "INSERT INTO `urls` (`id`, `name`, `display_name`, `url`, `headline`, `template_id`, `subline`, `content`, `user_id`, `meta_title`, `meta_desc`, `meta_keywords`, `meta_robots`, `date_created`, `date_modified`, `modified_by`) VALUES (NULL, :name, :display_name, :url, :headline, :template_id, :subline, :content, :user_id, :meta_title, :meta_desc, :meta_keywords, :meta_robots, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :modified_by)";
     $stmt = $db->prepare($sql);
     $params = array(
       ':name' => $url['name'],
       ':display_name' => $url['display_name'],
       ':url' => $url['url'],
+      ':headline' => $url['headline'],
+      ':template_id' => $url['template_id'],
+      ':subline' => $url['subline'],
+      ':content' => $url['content'],
       ':user_id' => $_SESSION['userId'],
       ':meta_title' => $url['meta_title'],
       ':meta_desc' => $url['meta_desc'],
@@ -177,5 +157,18 @@ class url extends \core\model
     } catch (\Exception $e) {
       return false;
     }
+  }
+
+  /**
+   * Get all templates as an associative array
+   *
+   * @return array
+   */
+  public static function getTemplates() {
+    $db = static::getDB();
+    $sql = "SELECT * FROM `templates`\n"
+    . "WHERE 1";
+    $stmt = $db->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

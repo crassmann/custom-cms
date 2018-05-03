@@ -4,42 +4,136 @@ namespace app\views\pages;
 
 use app\config;
 
-?>
+echo "<h1>Edit: ".$args['url']['name']."</h1>";
+echo "<div><form enctype='multipart/form-data' class='form-horizontal' action='' method='post' id='needs-validation' novalidate>\n";
 
-<h1><?php echo ucfirst($args['controller']) . ' ' . ucfirst($args['action']);?></h1>
-<div class="table-responsive">
-  <form enctype="multipart/form-data" id="edit-navigation-form" action="<?php echo config::ROOT_APP_DIR."pages/edit/".$args['request']; ?>" method="post">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Position</th>
-          <th>ge&auml;ndert</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-        <?php
-        foreach ($args['items'] as $item) {
-        echo "<td>".$item["id"]."</td>";
-        echo "<td><a href=\"".config::ROOT_APP_DIR.$item["url"]."\">".$item["name"]."</a></td>";
-        echo "<td><input type=\"number\" id=\"position\" name=\"".$item["page_id"]."[position]\" value=\"".$item["position"]."\" required></td>";
-        echo "<td><button type=\"submit\" id=\"deleteItem\" name=\"deleteItem\" value=\"".$item["page_id"]."\" class=\"close\"><span aria-hidden=\"true\">&times;</span></button></td>";
-        echo "</tr><tr>";
-        }
-        ?>
-        </tr>
-      </tbody>
-    </table>
-    <?php
-    echo "<div class ='form-inline'> Ein neuea Element dieser Seite hinzuf&uuml;gen:&nbsp;\n";
-    echo "<select class='form-control' name='add_item' id='add_item'><option value='' selected></option>\n";
-    echo "</select>&nbsp;";
-    echo "<button type=\"submit\" id='add' name='add' value='add' class='btn btn-primary'>Add</button>";
-    echo "</div>\n";
-    echo "<button type=\"submit\" id='save' name='save' value='save' class='mt-3 btn btn-success'>Save</button>";
-    ?>
-  </form>
+echo "				<div class='form-group row'>\n";
+echo "					<label for='id' class='col-sm-2 control-label'>Id:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='number' id='id' name='id' placeholder='".$args['url']['id']."' disabled>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='template_id' class='col-sm-2 control-label'>Template:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<select class='form-control' id='template_id' name='template_id'>\n";
+foreach ($args['templates'] as $key => $value) {
+  if ($args['url']['template_id'] == $value['template_id']) {
+    echo "						<option value='".$value['template_id']."' selected>".$value['template_name']."</option>\n";
+  } else {
+    echo "						<option value='".$value['template_id']."'>".$value['template_name']."</option>\n";
+  }
+}
+echo "						</select>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='name' class='col-sm-2 control-label'>Name:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='name' name='name' value='".$args['url']['name']."' required>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='display_name' class='col-sm-2 control-label'>Display Name:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='display_name' name='display_name' placeholder='Display Name' value='".$args['url']['display_name']."' required>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='url' class='col-sm-2 control-label'>URL:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='url' name='url' placeholder='URL' value='".$args['url']['url']."'>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='url' class='col-sm-2 control-label'>Headline:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='headline' name='headline' placeholder='Headline' value='".$args['url']['headline']."'>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='url' class='col-sm-2 control-label'>Subline:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='subline' name='subline' placeholder='Subline' value='".$args['url']['subline']."'>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='content' class='col-sm-2 control-label'>Content:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<textarea class='form-control' type='text' id='content' rows='20' name='content'>".$args['url']['content']."</textarea>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='user_id' class='col-sm-2 control-label'>Autor:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='number' id='user_id' name='user_id' value='".$args['url']['user_id']."' disabled>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='meta_title' class='col-sm-2 control-label'>Meta Title:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='meta_title' name='meta_title' placeholder='Meta Titel' value='".$args['url']['meta_title']."' required>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='meta_desc' class='col-sm-2 control-label'>Meta Description:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='meta_desc' name='meta_desc' placeholder='Meta Description' value='".$args['url']['meta_desc']."' required>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='meta_keywords' class='col-sm-2 control-label'>Meta Keywords:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='meta_keywords' name='meta_keywords' placeholder='Meta Keywords' value='".$args['url']['meta_keywords']."' required>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='meta_robots' class='col-sm-2 control-label'>Meta Robots:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='text' id='meta_robots' name='meta_robots' value='".$args['url']['meta_robots']."'>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='date_created' class='col-sm-2 control-label'>Erstellt:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='datetime' id='date_created' name='date_created' placeholder='".$args['url']['date_created']."' disabled>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='date_modified' class='col-sm-2 control-label'>Ge&auml;ndert:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='datetime' id='date_modified' name='date_modified' placeholder='".$args['url']['date_modified']."' disabled>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "				<div class='form-group row'>\n";
+echo "					<label for='modified_by' class='col-sm-2 control-label'>Ge&auml;ndert von:</label>\n";
+echo "					<div class='col-sm-10'>\n";
+echo "						<input class='form-control' type='number' id='modified_by' name='modified_by' value='".$_SESSION['userId']."' readonly>\n";
+echo "					</div>\n";
+echo "				</div>\n";
+
+echo "<br />
+<div class='form-group row'>
+  <label for='save' class='col-sm-2 control-label'>&nbsp;</label>
+  <div class='col-sm-10'>
+    <a class='btn btn-lg btn-info' href='".config::ROOT_APP_DIR.$args['url']['url']."' role='button'>view</a>
+    <button id='add' type='submit' name='submit' value='edit' class='btn btn-lg btn-success'><span class=\"glyphicon glyphicon-floppy-disk\"></span> speichern</button>
+  </div>
 </div>
+";
+echo "</form></div>";
