@@ -9,8 +9,10 @@ use app\config;
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <link rel="canonical" href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR.htmlentities($args['url']['url']); ?>" />
+    <meta name="keywords" content="<?php echo htmlentities($args['url']['meta_keywords']); ?>">
+		<meta name="description" content="<?php echo htmlentities($args['url']['meta_desc']); ?>">
+    <meta name="author" content="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>impressum">
     <link rel="icon" href="favicon.ico">
 
     <title><?php echo htmlentities($args['url']['meta_title']); ?></title>
@@ -24,11 +26,16 @@ use app\config;
     <link href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/css/offcanvas.css" rel="stylesheet">
   </head>
 
-  <body class="bg-light">
+  <body class="bg-light" itemscope itemtype="http://schema.org/WebPage">
 
     <?php
       // Navigation view
-      \core\view::render('header-navigation', $args);
+      if (!isset($args['namespace']) || $args['namespace'] != 'admin') {
+        $navigation = 'header-navigation';
+      } else {
+        $navigation = 'admin-navigation';
+      }
+      \core\view::render($navigation, $args);
     ?>
 
     <div class="jumbotron jumbotron-fluid bg-dark text-light" style="margin-bottom: 0px;">
@@ -39,9 +46,19 @@ use app\config;
 
     <nav aria-label="breadcrumb">
       <div class="container">
-        <ol class="breadcrumb bg-light px-0">
-          <li class="breadcrumb-item"><a class="text-dark" href="#"><em class="material-icons">home</em></a></li>
-          <li class="breadcrumb-item"><a class="text-dark" href="#"><?php echo $args['url']['name']; ?></a></li>
+        <ol class="breadcrumb bg-light px-0" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+         itemtype="http://schema.org/ListItem">
+            <a class="text-dark" itemscope itemtype="http://schema.org/Thing"
+       itemprop="item" href="#"><em class="material-icons" itemprop="name">home</em></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+         itemtype="http://schema.org/ListItem">
+            <a class="text-dark" itemscope itemtype="http://schema.org/Thing"
+       itemprop="item" href="#"><span itemprop="name"><?php echo $args['url']['name']; ?></span></a>
+            <meta itemprop="position" content="2" />
+          </li>
         </ol>
       </div>
     </nav>

@@ -18,9 +18,10 @@ use app\config;
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-    <!-- Custom CSS -->
+    <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/css/offcanvas.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,6 +37,9 @@ use app\config;
 				theme: 'modern',
 			  height: 500,
         content_css : "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js, <?php echo config::ROOT_APP_DIR; ?>app/assets/css/style.css",
+        relative_urls : false,
+        remove_script_host : true,
+        document_base_url : "<?php echo config::ROOT_APP_DIR; ?>",
 			  plugins: [
 			    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
 			    'searchreplace wordcount visualblocks visualchars code fullscreen',
@@ -91,7 +95,12 @@ use app\config;
 
     <?php
       // Navigation view
-      \core\view::render('header-navigation', $args);
+      if (!isset($args['namespace']) || $args['namespace'] != 'admin') {
+        $navigation = 'header-navigation';
+      } else {
+        $navigation = 'admin-navigation';
+      }
+      \core\view::render($navigation, $args);
     ?>
 
     <main role="main" class="container">
@@ -116,5 +125,6 @@ use app\config;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+    <script src="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/js/offcanvas.js"></script>
   </body>
 </html>

@@ -45,9 +45,9 @@ use app\config;
     <?php
     echo "<div class ='form-inline'> Eine neue Seite dieser Navigation hinzuf&uuml;gen:&nbsp;\n";
     echo "<select class='form-control' name='add_page' id='add_page'><option value='' selected></option>\n";
-    foreach ($args['pages'] as $page) {
-      if (!in_array($page["url_id"], $navItemIds)) {
-        echo "<option value='".$page["url_id"]."'>".$page["name"]."</option>\n";
+    foreach ($args['url'] as $url) {
+      if (!in_array($url["id"], $navItemIds)) {
+        echo "<option value='".$url["id"]."'>".$url["name"]."</option>\n";
       }
     }
     echo "</select>&nbsp;";

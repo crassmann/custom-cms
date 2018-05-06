@@ -49,7 +49,7 @@ class navigation extends \core\model
           . ' ON `navigation_items`.`pid` = `urls`.`id`'
           . ' WHERE `navigation_items`.`nid` = :nid'
           . ' AND `navigation_items`.`parent` = :parent'
-          . ' ORDER BY `position` ASC';
+          . ' ORDER BY `position`,`child_position` ASC';
     $stmt = $db->prepare($sql);
     $params = array(
       ':nid' => $nid,
@@ -80,7 +80,7 @@ class navigation extends \core\model
           . ' JOIN `navigation_items`'
           . ' ON `navigation_items`.`pid` = `urls`.`id`'
           . ' WHERE `navigation_items`.`nid` = :nid'
-          . ' ORDER BY `position` ASC';
+          . ' ORDER BY `position`,`child_position` ASC';
     $stmt = $db->prepare($sql);
     $params = array(
       ':nid' => $nid,

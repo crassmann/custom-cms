@@ -60,7 +60,8 @@ class navigation extends \core\controller
         }
       }
       if ($this->route_params['navi'] = $navigation::getNavigationItems($this->route_params['request'])) {
-        if ($this->route_params['pages'] = $page::getPages()) {
+        $url = new \app\models\url();
+        if ($this->route_params['url'] = $url::getURLs()) {
           view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
         }
       } else {

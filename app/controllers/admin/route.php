@@ -6,21 +6,21 @@ use app\config;
 use \core\view;
 
 /**
- * URLs controller
+ * Routes controller
  *
  * PHP version 7.0
  */
-class url extends \app\controllers\url
+class route extends \core\controller
 {
 
   /**
-   * Shows all URLs
+   * Shows all Templates
    *
    * @return void
    */
   public function indexAction() {
-    $url = new \app\models\url();
-    if ($this->route_params['url'] = $url::getURLs()) {
+    $route = new \app\models\route();
+    if ($this->route_params['route'] = $route::getRoutes()) {
       view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
     } else {
       $this->errorAction();
@@ -33,8 +33,7 @@ class url extends \app\controllers\url
    * @return void
    */
   public function newAction() {
-    $url = new \app\models\url();
-    $template = new \app\models\template();
+    $route = new \app\models\route();
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "add") {
 
@@ -42,15 +41,15 @@ class url extends \app\controllers\url
       foreach ($_POST as $key => $value) {
         $post[$key] = trim($value); // trim the user input
       }
-      if ($this->route_params['url'] = $url::new($post)) {
-        header("Location: ".config::ROOT_APP_DIR."url/edit/".$post['url']);
+      var_dump($post);
+      if ($this->route_params['route'] = $route::new($post)) {
+        header("Location: ".config::ROOT_APP_DIR."route/edit/".$this->route_params['route']);
       } else {
-        view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/new', $this->route_params);
+        view::renderTemplate(config::DEFAULT_TEMPLATE, 'route/new', $this->route_params);
       }
 
     } else {
-      $this->route_params['templates'] = $template::getTemplates();
-      view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/new', $this->route_params);
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'route/new', $this->route_params);
     }
   }
 
@@ -60,10 +59,9 @@ class url extends \app\controllers\url
    * @return void
    */
   public function editAction() {
-    $url = new \app\models\url();
-    $template = new \app\models\template();
+    $url = new \app\models\route();
     $this->route_params['url'] = $url::getURL($this->route_params['request']);
-    $this->route_params['templates'] = $template::getTemplates();
+    $this->route_params['templates'] = $url::getTemplates();
 
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "edit") {
@@ -105,20 +103,15 @@ class url extends \app\controllers\url
   public function deleteAction() {
     // If the delete form is submitted
     if (isset($_POST["close"])) {
-      $this->route_params['url'] = $_POST["close"];
-      view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/delete', $this->route_params);
+      $this->route_params['route'] = $_POST["close"];
+      view::renderTemplate(config::DEFAULT_TEMPLATE, 'route/delete', $this->route_params);
     }
 
     // If the delete form is submitted
     if (isset($_POST["delete"])) {
-      $url = new \app\models\url();
-      $navi = new \app\models\navigation();
-      if ($this->route_params['url'] = $url::deleteURL($_POST["delete"])) {
-        if ($this->route_params['url'] = $navi::deleteByURL($_POST["delete"])) {
-          header("Location: ".config::ROOT_APP_DIR."url/index/");
-        } else {
-          $this->errorAction();
-        }
+      $route = new \app\models\route();
+      if ($this->route_params['route'] = $route::deleteRoute($_POST["delete"])) {
+        header("Location: ".config::ROOT_APP_DIR."route/index/");
       } else {
         $this->errorAction();
       }

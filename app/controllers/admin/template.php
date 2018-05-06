@@ -10,17 +10,17 @@ use \core\view;
  *
  * PHP version 7.0
  */
-class url extends \app\controllers\url
+class template extends \core\controller
 {
 
   /**
-   * Shows all URLs
+   * Shows all Templates
    *
    * @return void
    */
   public function indexAction() {
-    $url = new \app\models\url();
-    if ($this->route_params['url'] = $url::getURLs()) {
+    $template = new \app\models\template();
+    if ($this->route_params['template'] = $template::getTemplates()) {
       view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
     } else {
       $this->errorAction();
@@ -34,7 +34,6 @@ class url extends \app\controllers\url
    */
   public function newAction() {
     $url = new \app\models\url();
-    $template = new \app\models\template();
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "add") {
 
@@ -49,7 +48,7 @@ class url extends \app\controllers\url
       }
 
     } else {
-      $this->route_params['templates'] = $template::getTemplates();
+      $this->route_params['templates'] = $url::getTemplates();
       view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/new', $this->route_params);
     }
   }
@@ -61,9 +60,8 @@ class url extends \app\controllers\url
    */
   public function editAction() {
     $url = new \app\models\url();
-    $template = new \app\models\template();
     $this->route_params['url'] = $url::getURL($this->route_params['request']);
-    $this->route_params['templates'] = $template::getTemplates();
+    $this->route_params['templates'] = $url::getTemplates();
 
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "edit") {

@@ -9,7 +9,7 @@ use app\config;
 <footer class="container py-5">
   <div class="row">
     <div class="col-12 col-md">
-      <h5 class="text-muted">MVC Master</h5>
+      <h5 class="text-muted">POLARINO</h5>
       <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
     </div>
     <?php
@@ -25,7 +25,7 @@ use app\config;
           ";
           foreach ($value['childs'] as $k => $v) {
             if ($args['request'] == $v['url']) {
-              echo "<li><a class=\"text-dark\" href=\"".config::ROOT_APP_DIR.$v['url']."\">".$v['name']."</a></li>";
+              echo "<li><a class=\"text-info\" href=\"".config::ROOT_APP_DIR.$v['url']."\">".$v['name']."</a></li>";
             } else {
               echo "<li><a class=\"text-muted\" href=\"".config::ROOT_APP_DIR.$v['url']."\">".$v['name']."</a></li>";
             }
