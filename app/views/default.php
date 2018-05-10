@@ -56,8 +56,8 @@ use app\config;
 				force_br_newlines : true,
 	      force_p_newlines : true,
 	      forced_root_block : '',
-        valid_children : "+body[class|main|role|style|small",
-        extended_valid_elements : 'main[class|style|role], class, small, style, role, a[href|onclick|target|rel|title]',
+        valid_children : "+body[class|main|role|style|small|itemscope|itemtype]",
+        extended_valid_elements : 'main[class|style|role], class, small, style, role, itemscope, itemtype, a[href|onclick|target|rel|title]',
 			 });
 			 </script>
 

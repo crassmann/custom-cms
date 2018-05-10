@@ -94,7 +94,7 @@ code {
 
 /* Carousel base class */
 .carousel {
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -104,7 +104,7 @@ code {
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-  height: 32rem;
+  max-height: 32rem;
   background-color: #777;
 }
 .carousel-item > img {
@@ -112,7 +112,7 @@ code {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 32rem;
+  max-height: 32rem;
 }
 
 /*

@@ -21,13 +21,13 @@ class config
      * Database name
      * @var string
      */
-    const DB_NAME = 'custom-cms';
+    const DB_NAME = 'd0252a59';
 
     /**
      * Database user
      * @var string
      */
-    const DB_USER = 'root';
+    const DB_USER = 'd0252a59';
 
     /**
      * Database password
@@ -55,7 +55,7 @@ class config
      * Set app dir if it's not root
      * @var boolean
      */
-    const ROOT_APP_DIR = '/projects/custom-cms/';
+    const ROOT_APP_DIR = '/';
 
     /**
      * Show or hide error messages on screen

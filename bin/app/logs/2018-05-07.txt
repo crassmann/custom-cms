@@ -1,0 +1,12 @@
+[07-May-2018 18:52:34 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'd0252a59'@'localhost' (using password: YES)'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/core/model.php(27): PDO->__construct('mysql:host=loca...', 'd0252a59', 'b9HWoPPqZ8wGrb2...', Array)
+#1 /Users/christian/Sites/projects/custom-cms/app/models/route.php(43): core\model::getDB()
+#2 /Users/christian/Sites/projects/custom-cms/index.php(26): app\models\route::getRoutes()
+#3 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/model.php' on line 27
+[07-May-2018 18:52:34 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'd0252a59'@'localhost' (using password: YES)'
+Stack trace: #0 /Users/christian/Sites/projects/custom-cms/core/model.php(27): PDO->__construct('mysql:host=loca...', 'd0252a59', 'b9HWoPPqZ8wGrb2...', Array)
+#1 /Users/christian/Sites/projects/custom-cms/app/models/route.php(43): core\model::getDB()
+#2 /Users/christian/Sites/projects/custom-cms/index.php(26): app\models\route::getRoutes()
+#3 {main}
+Thrown in '/Users/christian/Sites/projects/custom-cms/core/model.php' on line 27

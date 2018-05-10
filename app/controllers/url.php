@@ -29,14 +29,4 @@ class url extends \core\controller
       $this->errorAction();
     }
   }
-  /**
-   * Show the index url
-   *
-   * @return void
-   */
-  public function testAction()
-  {
-    view::renderTemplate($this->route_params['template'], '404', $this->route_params);
-  }
-
 }

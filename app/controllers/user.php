@@ -67,12 +67,12 @@ class user extends \core\controller
             if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
               $auth = new \app\models\auth();
               if ($auth::addAuth($this->route_params['user']['id'])) {
-                header("Location: ".config::ROOT_APP_DIR."url/index/");
+                header("Location: ".config::ROOT_APP_DIR."route/index/");
               } else {
                 $error[] = "Remember Me Error";
               }
             }
-            header("Location: ".config::ROOT_APP_DIR."url/index/");
+            header("Location: ".config::ROOT_APP_DIR."route/index/");
           } else {
             $error[] = "Account closed due to too many login attempts!";
           }

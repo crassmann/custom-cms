@@ -20,6 +20,7 @@ use app\config;
           <th>URL</th>
           <th>Controller</th>
           <th>Action</th>
+          <th>Params</th>
           <th>Namespace</th>
           <th>Position</th>
           <th>&nbsp;</th>
@@ -35,6 +36,11 @@ use app\config;
         echo "<td>".$route["route_url"]."</td>";
         echo "<td>".$route["route_controller"]."</td>";
         echo "<td>".$route["route_action"]."</td>";
+        if (!empty($route["route_params"])) {
+          echo "<td>true</td>";
+        } else {
+          echo "<td></td>";
+        }
         echo "<td>".$route["route_namespace"]."</td>";
         echo "<td>".$route["route_position"]."</td>";
         echo "<td><a href=\"".config::ROOT_APP_DIR.$route["route_url"]."\"><i class='material-icons'>open_in_new</i></a></td>";

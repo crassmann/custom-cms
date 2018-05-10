@@ -58,7 +58,7 @@ use app\config;
 			@viewport         { width: device-width; }
 		</style>
   </head>
-  <body class="">
+  <body class="bg-white" itemscope itemtype="http://schema.org/WebPage">
     <!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PSKD7"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

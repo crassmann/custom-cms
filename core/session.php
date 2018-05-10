@@ -59,7 +59,7 @@ class session extends model {
 		// Configure Session parameter (php.ini)
 		ini_set( 'session.auto_start', 0 ); // Defines whether the session module starts a session automatically on request startup [Default: '0']
 		ini_set( 'session.name', 'PHPSESSID' ); // Defines the name of the session which is used as cookie name; it should only contain alphanumeric characters [Default: 'PHPSESSID']
-		ini_set( 'session.save_handler', 'user' ); // Defines the name of the handler which is used for storing and retrieving data associated with a session [Default: 'files']
+		// ini_set( 'session.save_handler', 'user' ); // Defines the name of the handler which is used for storing and retrieving data associated with a session [Default: 'files']
 		ini_set( 'session.gc_probability', 1 ); // Conjunction with session.gc_divisor is used to manage probability that the garbage collection routine is started [Default: '1']
 		ini_set( 'session.gc_divisor', 50 ); // Coupled with session.gc_probability defines the probability that the garbage collection process is started on every session initialization [Default: '100']
 		ini_set( 'session.gc_maxlifetime', 30*60 ); // Defines the number of seconds after which data will be seen as 'garbage' and potentially cleaned up [Depending on session.gc_probability and session.gc_divisor]

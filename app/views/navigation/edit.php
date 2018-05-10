@@ -30,7 +30,7 @@ use app\config;
             $navItemIds[] = $item["pid"];
           }
         echo "<td>".$item["id"]."</td>";
-        echo "<td><a href=\"".config::ROOT_APP_DIR."page/edit/".$item["pid"]."\">".$item["name"]."</a></td>";
+        echo "<td><a href=\"".config::ROOT_APP_DIR."url/edit/".$item["url"]."\">".$item["name"]."</a></td>";
         echo "<td>/".$item["url"]."</td>";
         echo "<td><input type=\"number\" id=\"position\" name=\"".$item["navi_id"]."[position]\" value=\"".$item["position"]."\" required></td>";
         echo "<td><input type=\"number\" id=\"parent\" name=\"".$item["navi_id"]."[parent]\" value=\"".$item["parent"]."\" required></td>";

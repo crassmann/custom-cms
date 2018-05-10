@@ -28,7 +28,7 @@ class route extends \core\controller
   }
 
   /**
-   * Adds a new URL
+   * Adds a new Route
    *
    * @return void
    */
@@ -41,7 +41,6 @@ class route extends \core\controller
       foreach ($_POST as $key => $value) {
         $post[$key] = trim($value); // trim the user input
       }
-      var_dump($post);
       if ($this->route_params['route'] = $route::new($post)) {
         header("Location: ".config::ROOT_APP_DIR."route/edit/".$this->route_params['route']);
       } else {
@@ -54,15 +53,13 @@ class route extends \core\controller
   }
 
   /**
-   * Edits a URL
+   * Edits a Route
    *
    * @return void
    */
   public function editAction() {
-    $url = new \app\models\route();
-    $this->route_params['url'] = $url::getURL($this->route_params['request']);
-    $this->route_params['templates'] = $url::getTemplates();
-
+    $route = new \app\models\route();
+    $this->route_params['route'] = $route::getRoute($this->route_params['request']);
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "edit") {
 
@@ -72,17 +69,17 @@ class route extends \core\controller
       }
 
       $changes = [];
-  		foreach ($this->route_params['url'] as $key => $value) {
+  		foreach ($this->route_params['route'] as $key => $value) {
   			if (array_key_exists ( $key , $post )) {
   				if ($post[$key] != $value) {
   					$changes[$key] = $post[$key];
-            $this->route_params['url'][$key] = $post[$key];
+            $this->route_params['route'][$key] = $post[$key];
   				}
   			}
   		}
       if (count($changes) > 0) {
-        if ($this->route_params['url']['edit'] = $url::edit($this->route_params['url']['id'], $changes)) {
-          header("Location: ".config::ROOT_APP_DIR.$this->route_params['controller']."/".$this->route_params['action']."/".$this->route_params['url']['url']);
+        if ($this->route_params['route']['edit'] = $route::edit($this->route_params['route']['route_id'], $changes)) {
+          header("Location: ".config::ROOT_APP_DIR.$this->route_params['controller']."/".$this->route_params['action']."/".$this->route_params['route']['route_id']);
           exit;
         } else {
           $this->errorAction();
@@ -91,12 +88,12 @@ class route extends \core\controller
       }
 
     }
-    view::renderTemplate(config::DEFAULT_TEMPLATE, 'url/edit', $this->route_params);
+    view::renderTemplate(config::DEFAULT_TEMPLATE, 'route/edit', $this->route_params);
 
   }
 
   /**
-   * Deletes a URL
+   * Deletes a Route
    *
    * @return void
    */

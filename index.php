@@ -26,9 +26,9 @@ set_exception_handler('core\error::exceptionHandler');
  $route = $routes::getRoutes();
  foreach ($route as $key => $value) {
    if (!empty($value['route_namespace'])) {
-     $router->add(''.$value['route_url'].'', ['controller' => $value['route_controller'], 'action' => $value['route_action'], 'namespace' => $value['route_namespace'], 'template' => 'default']);
+     $router->add(''.$value['route_url'].'', ['controller' => $value['route_controller'], 'action' => $value['route_action'], 'params' => $value['route_params'], 'namespace' => $value['route_namespace'], 'template' => 'default']);
    } else {
-     $router->add(''.$value['route_url'].'', ['controller' => $value['route_controller'], 'action' => $value['route_action'], 'template' => 'default']);
+     $router->add(''.$value['route_url'].'', ['controller' => $value['route_controller'], 'action' => $value['route_action'], 'params' => $value['route_params'], 'template' => 'default']);
    }
  }
 
