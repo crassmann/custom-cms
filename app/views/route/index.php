@@ -17,7 +17,7 @@ use app\config;
         <tr>
           <th>Id</th>
           <th>Name</th>
-          <th>URL</th>
+          <th>Pattern</th>
           <th>Controller</th>
           <th>Action</th>
           <th>Params</th>

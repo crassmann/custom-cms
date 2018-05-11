@@ -53,7 +53,7 @@ use app\config;
         echo "
             <ul class='nav navbar-nav justify-content-end'>
             <li class='nav-item'>
-              <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."url/index/\"><i class='material-icons'>https</i></a>
+              <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."route/index/\"><i class='material-icons'>https</i></a>
             </li>
             </ul>
         ";

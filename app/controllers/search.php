@@ -28,11 +28,13 @@ class search extends \core\controller
       if (!empty($this->route_params['request'])) {
         $request = $this->route_params['request'];
       } else {
-        $request = " ";
+        $request = "Polarino";
       }
     } else {
       $request = strtolower($_POST['q']);
     }
+
+    $req = explode(' ', $request);
 
     $resultData = array();
     foreach ($products->data as $obj) {
@@ -40,14 +42,22 @@ class search extends \core\controller
       foreach ($obj as $key => $value) {
         if (is_array($value)) {
           foreach ($value as $k => $v) {
-            $pos = strpos(strtolower($v), $request);
+            foreach ($req as $rkey => $rvalue) {
+              $pos = strpos(strtolower($v), $rvalue);
+            }
+          }
+          if ($pos === false) {
+          } else {
+            $i = true;
           }
         } else {
-          $pos = strpos(strtolower($value), $request);
-        }
-        if ($pos === false) {
-        } else {
-          $i = true;
+          foreach ($req as $rkey => $rvalue) {
+            $pos = strpos(strtolower($value), $rvalue);
+          }
+          if ($pos === false) {
+          } else {
+            $i = true;
+          }
         }
       }
       if ($i) {
@@ -58,7 +68,13 @@ class search extends \core\controller
 
     $navigation = new \app\models\navigation();
     $this->route_params['navigation'] = $navigation::getNavigation(1);
-    view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+
+    $url = new \app\models\url();
+    if ($this->route_params['url'] = $url::getURL($this->route_params['request'])) {
+      view::renderTemplate($this->route_params['url']['template_url'], $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+    } else {
+      view::renderTemplate(config::DEFAULT_TEMPLATE, $this->route_params['controller'].'/'.$this->route_params['action'], $this->route_params);
+    }
 
   }
 }
