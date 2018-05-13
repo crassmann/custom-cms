@@ -55,19 +55,19 @@ $(document).ready(function(){
 
   $('#categories li a').click(function(e){
       e.preventDefault();
-      console.log(e);
       // reset the active class on all the buttons
       $('#categories li a').removeClass('active');
       // update the active state on our clicked button
       $(this).addClass('active');
       // get the category from the attribute
       var filterVal = $(this).data('filter');
+      console.log(filterVal);
 
-      if(filterVal === 'all'){
-        $prdcts.show();
-      }else{
+      if (filterVal === 'all'){
+        $prdcts.show('slow');
+      } else {
          // hide all then filter the ones to show
-         $prdcts.hide().filter('.' + filterVal).show();
+         $prdcts.hide('slow').filter('.' + filterVal).show('slow');
       }
   });
 });
