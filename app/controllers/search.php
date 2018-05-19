@@ -6,7 +6,7 @@ use app\config;
 use \core\view;
 
 /**
- * URLs controller
+ * Search controller
  *
  * PHP version 7.0
  */
@@ -14,7 +14,7 @@ class search extends \core\controller
 {
 
   /**
-   * Show the index url
+   * Show the search result
    *
    * @return void
    */

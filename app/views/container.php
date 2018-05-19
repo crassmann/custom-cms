@@ -3,10 +3,9 @@
 namespace app\views;
 
 use app\config;
-
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo htmlentities($args['property']['default_language']); ?>">
+<html lang="de">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,7 +13,7 @@ use app\config;
     <link rel="canonical" href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR.htmlentities($args['url']['url']); ?>" />
     <meta name="keywords" content="<?php echo htmlentities($args['url']['meta_keywords']); ?>">
 		<meta name="description" content="<?php echo htmlentities($args['url']['meta_desc']); ?>">
-    <meta name="author" content="<?php echo htmlentities($args['property']['author']); ?>">
+    <meta name="author" content="<?php echo htmlentities($args['url']['user_id']); ?>">
     <link rel="icon" href="favicon.ico">
 
     <title><?php echo htmlentities($args['url']['meta_title']); ?></title>
@@ -76,8 +75,38 @@ use app\config;
       }
       \core\view::render($navigation, $args);
 
-      // View
-      \core\view::render($file, $args);
+      ?>
+
+      <nav aria-label="breadcrumb">
+        <div class="container">
+          <ol class="breadcrumb bg-white px-0" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+           itemtype="http://schema.org/ListItem">
+              <a class="text-dark" itemscope itemtype="http://schema.org/Thing"
+         itemprop="item" href="#"><em class="material-icons" itemprop="name">home</em></a>
+              <meta itemprop="position" content="1" />
+            </li>
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+           itemtype="http://schema.org/ListItem">
+              <a class="text-dark" itemscope itemtype="http://schema.org/Thing"
+         itemprop="item" href="#"><span itemprop="name"><?php echo $args['url']['name']; ?></span></a>
+              <meta itemprop="position" content="2" />
+            </li>
+          </ol>
+        </div>
+      </nav>
+
+      <main role="main" class="container">
+
+      <?php
+      echo "<h1>".$args['url']['headline']."</h1>";
+        // View
+        \core\view::render($file, $args);
+      ?>
+
+      </main><!-- /.container -->
+
+      <?php
 
       // Footer view
       if (!isset($args['namespace']) || $args['namespace'] != 'admin') {

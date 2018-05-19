@@ -8,7 +8,7 @@ use app\config;
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand mb-0 h1" href="<? echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>"><span class="font-weight-bold text-dark" itemprop="name">polarino</span></a>
+    <a class="navbar-brand mb-0 h1" href="<? echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>"><span class="font-weight-bold text-dark" itemprop="name"><?php echo htmlentities($args['property']['website_name']); ?></span></a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>

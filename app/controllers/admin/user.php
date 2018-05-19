@@ -21,11 +21,12 @@ class user extends \app\controllers\user
   public function indexAction()
   {
     $user = new \app\models\user();
-    if ($this->route_params['user'] = $user::getUsers()) {
-      view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/index', $this->route_params);
+    if ($_SESSION['userRole'] == 1) {
+      $this->route_params['user'] = $user::getUsers();
     } else {
-      $this->errorAction();
+      $this->route_params['user'] = array($user::getUserById($_SESSION['userId']));
     }
+    view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/index', $this->route_params);
   }
 
   /**
@@ -35,25 +36,30 @@ class user extends \app\controllers\user
    */
   public function newAction()
   {
-    // If the form is submitted
-    if (isset($_POST["submit"]) && $_POST["submit"] == "add") {
+    // If it's an admin
+    if ($_SESSION['userRole'] == 1) {
+      // If the form is submitted
+      if (isset($_POST["submit"]) && $_POST["submit"] == "add") {
 
-      foreach ($_POST as $key => $value) {
-        $_POST[$key] = trim($value); // trim the user input
-      }
-
-      $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-      if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $user = new \app\models\user();
-        if ($addedUserId = $user::new($_POST)) {
-          header("Location: ".config::ROOT_APP_DIR."user/index/");
+        foreach ($_POST as $key => $value) {
+          $_POST[$key] = trim($value); // trim the user input
         }
-      } else {
-        $error[] = $_POST['email']. " is not a valid email address";
-      }
 
+        $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+          $user = new \app\models\user();
+          if ($addedUserId = $user::new($_POST)) {
+            header("Location: ".config::ROOT_APP_DIR."user/index/");
+          }
+        } else {
+          $error[] = $_POST['email']. " is not a valid email address";
+        }
+
+      } else {
+        view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/new', $this->route_params);
+      }
     } else {
-      view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/new', $this->route_params);
+      $this->errorAction();
     }
   }
 
@@ -65,7 +71,14 @@ class user extends \app\controllers\user
   public function editAction()
   {
     $user = new \app\models\user();
-    $this->route_params['editUser'] = $user::getUserById($this->route_params['request']);
+
+
+    // If it's an admin
+    if ($_SESSION['userRole'] == 1) {
+      $this->route_params['editUser'] = $user::getUserById($this->route_params['request']);
+    } else {
+      $this->route_params['editUser'] = $user::getUserById($_SESSION['userId']);
+    }
 
     // If the form is submitted
     if (isset($_POST["submit"]) && $_POST["submit"] == "edit") {
@@ -95,7 +108,7 @@ class user extends \app\controllers\user
       }
 
     }
-    view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/new', $this->route_params);
+    view::renderTemplate(config::DEFAULT_TEMPLATE, 'user/edit', $this->route_params);
   }
 
   /**
@@ -118,11 +131,15 @@ class user extends \app\controllers\user
       if ($this->route_params['deleteUser'] = $user::deleteUser($_POST["userDelete"])) {
         $auth::removeAuthTokenByUserId($_POST["userDelete"]);
         $auth::removeAuthCookie();
-        $this->indexAction();
+        if ($_POST["userDelete"] == $_SESSION['userId']) {
+          header("Location: ".config::ROOT_APP_DIR."logout");
+        } else {
+          $this->indexAction();
+        }
       } else {
         $this->errorAction();
       }
     }
-    $this->errorAction();
+    // $this->errorAction();
   }
 }

@@ -35,6 +35,7 @@ class user extends \core\controller
             $user = $u::getUserById($auth_token['user_id']);
             $_SESSION['userId'] = $auth_token['user_id'];
             $_SESSION['userName'] = $user['name'];
+            $_SESSION['userRole'] = $user['role'];
             $u::updateLastLogin($auth_token['user_id']);
             header("Location: ".config::ROOT_APP_DIR."url/index/");
           } else {
@@ -63,7 +64,7 @@ class user extends \core\controller
             $u::resetFailedLoginAttempts($this->route_params['user']['id']);
             $_SESSION['userId'] = $this->route_params['user']['id'];
             $_SESSION['userName'] = $this->route_params['user']['name'];
-
+            $_SESSION['userRole'] = $this->route_params['user']['role'];
             if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] = "remember-me") {
               $auth = new \app\models\auth();
               if ($auth::addAuth($this->route_params['user']['id'])) {

@@ -54,4 +54,7 @@ use app\models\auth;
     </table>
   </form>
 </div>
-<a href="<?php echo config::ROOT_APP_DIR; ?>user/new/" class="btn btn-primary" role="button">Neuen User anlegen</a>
+<?php
+if ($_SESSION['userRole'] == 1) {
+  echo '<a href="'.config::ROOT_APP_DIR.'user/new/" class="btn btn-primary" role="button">Neuen User anlegen</a>';
+}

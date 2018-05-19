@@ -30,6 +30,18 @@ abstract class controller extends app
       $this->route_params = $route_params;
       $this->session = new session();
 
+      $s = new \app\models\settings();
+      $settings = $s->getSettings();
+      if( is_array($settings) ) {
+      	foreach ($settings as $key => $value) {
+      		if( is_array($value) ) {
+      			foreach ($value as $k => $v) {
+      				$this->route_params['property'][$value["property"]] = $value["value"];
+      			}
+      		}
+      	}
+      }
+
       $navigation = new \app\models\navigation();
       $header_navigation = $navigation::getNavigation(1, 0);
       foreach ($header_navigation as $key => $value) {

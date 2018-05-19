@@ -12,10 +12,11 @@ use app\config;
 abstract class app
 {
   /**
-   * Session Parameters
+   * App Parameters
    * @var array
    */
   public $session;
+  public $settings;
 
   /**
    * App constructor
@@ -24,6 +25,5 @@ abstract class app
    */
   public function __construct() {
   }
-
 }
 ?>

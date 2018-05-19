@@ -6,7 +6,7 @@ use app\config;
 use \core\view;
 
 /**
- * Pages controller
+ * Auth controller
  *
  * PHP version 7.0
  */
