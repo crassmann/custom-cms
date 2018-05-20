@@ -25,10 +25,13 @@ use app\config;
               <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."url/index/\"><i class='material-icons'>link</i> URLs</a>
             </li>
             <li class='nav-item'>
+              <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."navigation/index/\"><i class='material-icons'>menu</i> Navi</a>
+            </li>
+            <li class='nav-item'>
               <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."template/index/\"><i class='material-icons'>content_copy</i> Templates</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."navigation/index/\"><i class='material-icons'>menu</i> Navi</a>
+              <a class='nav-link' href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."settings/index/\"><i class='material-icons'>settings</i> Settings</a>
             </li>
             <li class=\"nav-item dropdown\">
               <a class=\"nav-link dropdown-toggle\" href=\"".$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR."user/index/\" id=\"navDropDownUser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class='material-icons md-10'>face</i> User</a>
@@ -48,14 +51,7 @@ use app\config;
           </ul>
         ";
       }
-      // echo "<pre>";
-      // var_dump($args['header-navigation']);
-      // echo "</pre>";
       ?>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>

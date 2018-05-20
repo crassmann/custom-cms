@@ -26,6 +26,12 @@ class user extends \core\controller
       exit;
     }
 
+    $u = new \app\models\user();
+    if ($u::countLoginAttempts() >= config::MAX_LOGIN_ATTEMPTS) {
+      header("Location: ".config::ROOT_APP_DIR);
+      exit;
+    }
+
     if (isset($_COOKIE['rememberMe'])) {
       $auth = new \app\models\auth();
       if ($auth_token = $auth::checkAuthToken($_COOKIE['rememberMe'])) {
@@ -52,6 +58,7 @@ class user extends \core\controller
     if (isset($_POST["submit"], $_POST["email"], $_POST["password"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
 
       $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
 
       if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $u = new \app\models\user();
@@ -81,6 +88,7 @@ class user extends \core\controller
         }
         else {
           $u::increaseFailedLoginAttempts($_POST['email']);
+          $addAttempt = $u::addLoginAttempt();
           $error[] = "Please provide valid credentials!";
         }
 

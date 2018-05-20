@@ -12,9 +12,9 @@ use app\config;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="canonical" href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR.htmlentities($args['url']['url']); ?>" />
-    <meta name="keywords" content="<?php echo htmlentities($args['url']['meta_keywords']); ?>">
-		<meta name="description" content="<?php echo htmlentities($args['url']['meta_desc']); ?>">
-    <meta name="author" content="<?php echo htmlentities($args['property']['author']); ?>">
+    <meta name="keywords" content="<?php echo htmlentities($args['url']['meta_keywords']); ?>" />
+    <meta name="description" content="<?php echo htmlentities($args['url']['meta_desc']); ?>" />
+    <meta name="author" content="<?php echo htmlentities($args['property']['author']); ?>" />
     <link rel="icon" href="favicon.ico">
 
     <title><?php echo htmlentities($args['url']['meta_title']); ?></title>
@@ -33,7 +33,7 @@ use app\config;
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
     <!-- Google Tag Manager -->
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

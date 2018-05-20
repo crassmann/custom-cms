@@ -190,6 +190,55 @@ class user extends \core\model
    *
    * @return id or false
    */
+  public static function addLoginAttempt() {
+    $db = static::getDB();
+    $sql = "INSERT INTO `login_attempts` (`id`, `attempts`, `agent`, `ip`, `timestamp`) VALUES (NULL, :attempts, :agent, :ip, CURRENT_TIMESTAMP)";
+    $stmt = $db->prepare($sql);
+    $params = array(
+      ':attempts' => 1,
+      ':agent' => $_SERVER['HTTP_USER_AGENT'],
+      ':ip' => $_SERVER['REMOTE_ADDR'],
+    );
+    try {
+      $stmt->execute( $params );
+      return $db->lastInsertId();
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Count attempts
+   *
+   * @param String $agent  The user $agent
+   * @param String $ip  The user $ip
+   *
+   * @return id or false
+   */
+  public static function countLoginAttempts() {
+    $db = static::getDB();
+    $sql = "SELECT COUNT(*) AS count FROM `login_attempts` WHERE `agent` = :agent AND `ip` = :ip";
+    $stmt = $db->prepare($sql);
+    $params = array(
+      ':agent' => $_SERVER['HTTP_USER_AGENT'],
+      ':ip' => $_SERVER['REMOTE_ADDR'],
+    );
+    try {
+      $stmt->execute( $params );
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $result['count'];
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
+  /**
+   * Adds a new user
+   *
+   * @param Array $user  The user params
+   *
+   * @return id or false
+   */
   public static function new($user) {
     $db = static::getDB();
     $sql = "INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `state`, `date_created`, `date_modified`) VALUES (NULL, :name, :email, :password, :role, :state, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";

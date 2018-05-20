@@ -35,12 +35,28 @@ class product extends \core\controller
       }
 
       foreach ($products->data as $obj) {
+
         if ($obj->{'variations.ageGroup'} == 'JUGENDLICHE') {
           $obj->{'variations.ageGroup'} = 'KINDER';
         }
         if ($obj->{'variations.gender'} == 'UNISEX') {
           $obj->{'variations.gender'} = 'WEIBLICH';
         }
+
+        // Assign targetGroup
+        if ($obj->{'variations.gender'} == 'WEIBLICH' && $obj->{'variations.ageGroup'} == 'ERWACHSENE') {
+          $obj->{'variations.targetGroup'} = 'DAMEN';
+        }
+        if ($obj->{'variations.gender'} == 'MAENNLICH' && $obj->{'variations.ageGroup'} == 'ERWACHSENE') {
+          $obj->{'variations.targetGroup'} = 'HERREN';
+        }
+        if ($obj->{'variations.gender'} == 'WEIBLICH' && $obj->{'variations.ageGroup'} == 'KINDER') {
+          $obj->{'variations.targetGroup'} = 'MAEDCHEN';
+        }
+        if ($obj->{'variations.gender'} == 'MAENNLICH' && $obj->{'variations.ageGroup'} == 'KINDER') {
+          $obj->{'variations.targetGroup'} = 'JUNGEN';
+        }
+
         if ((count($p)/2) == 1) {
           if ($obj->{$p[0]} == $p[1]) {
             $this->route_params['products'][] = $obj;
@@ -58,6 +74,31 @@ class product extends \core\controller
         }
       }
     } else {
+
+      foreach ($products->data as $obj) {
+
+        if ($obj->{'variations.ageGroup'} == 'JUGENDLICHE') {
+          $obj->{'variations.ageGroup'} = 'KINDER';
+        }
+        if ($obj->{'variations.gender'} == 'UNISEX') {
+          $obj->{'variations.gender'} = 'WEIBLICH';
+        }
+
+        // Assign targetGroup
+        if ($obj->{'variations.gender'} == 'WEIBLICH' && $obj->{'variations.ageGroup'} == 'ERWACHSENE') {
+          $obj->{'variations.targetGroup'} = 'DAMEN';
+        }
+        if ($obj->{'variations.gender'} == 'MAENNLICH' && $obj->{'variations.ageGroup'} == 'ERWACHSENE') {
+          $obj->{'variations.targetGroup'} = 'HERREN';
+        }
+        if ($obj->{'variations.gender'} == 'WEIBLICH' && $obj->{'variations.ageGroup'} == 'KINDER') {
+          $obj->{'variations.targetGroup'} = 'MAEDCHEN';
+        }
+        if ($obj->{'variations.gender'} == 'MAENNLICH' && $obj->{'variations.ageGroup'} == 'KINDER') {
+          $obj->{'variations.targetGroup'} = 'JUNGEN';
+        }
+
+      }
       $this->route_params['products'] = $products->data;
     }
 

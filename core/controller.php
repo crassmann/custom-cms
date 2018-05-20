@@ -32,6 +32,7 @@ abstract class controller extends app
 
       $s = new \app\models\settings();
       $settings = $s->getSettings();
+      $this->settings = $settings;
       if( is_array($settings) ) {
       	foreach ($settings as $key => $value) {
       		if( is_array($value) ) {

@@ -24,6 +24,41 @@ use app\config;
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/css/style.css" rel="stylesheet">
     <link href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>app/assets/css/offcanvas.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','');</script>
+		<!-- End Google Tag Manager -->
+
+		<style>
+			/*!
+			 * IE10 viewport hack for Surface/desktop Windows 8 bug
+			 * Copyright 2014-2015 Twitter, Inc.
+			 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+			 */
+
+			/*
+			 * See the Getting Started docs for more information:
+			 * http://getbootstrap.com/getting-started/#support-ie10-width
+			 */
+			@-webkit-viewport { width: device-width; }
+			@-moz-viewport    { width: device-width; }
+			@-ms-viewport     { width: device-width; }
+			@-o-viewport      { width: device-width; }
+			@viewport         { width: device-width; }
+		</style>
+
   </head>
 
   <body class="bg-light" itemscope itemtype="http://schema.org/WebPage">
@@ -49,14 +84,12 @@ use app\config;
         <ol class="breadcrumb bg-light px-0" itemscope itemtype="http://schema.org/BreadcrumbList">
           <li class="breadcrumb-item" itemprop="itemListElement" itemscope
          itemtype="http://schema.org/ListItem">
-            <a class="text-dark" itemscope itemtype="http://schema.org/Thing"
-       itemprop="item" href="#"><em class="material-icons" itemprop="name">home</em></a>
+           <a class="text-dark" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR; ?>"><em class="material-icons" itemprop="name">home</em></a>
             <meta itemprop="position" content="1" />
           </li>
           <li class="breadcrumb-item" itemprop="itemListElement" itemscope
          itemtype="http://schema.org/ListItem">
-            <a class="text-dark" itemscope itemtype="http://schema.org/Thing"
-       itemprop="item" href="#"><span itemprop="name"><?php echo $args['url']['name']; ?></span></a>
+            <a class="text-dark" itemscope itemtype="http://schema.org/Thing" itemprop="item" href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].config::ROOT_APP_DIR.$args['url']['url']; ?>"><span itemprop="name"><?php echo $args['url']['name']; ?></span></a>
             <meta itemprop="position" content="2" />
           </li>
         </ol>
@@ -84,7 +117,6 @@ use app\config;
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>

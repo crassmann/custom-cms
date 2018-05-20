@@ -36,6 +36,10 @@ class search extends \core\controller
 
     $req = explode(' ', $request);
 
+    foreach ($req as $key => $value) {
+      // echo $value;
+    }
+
     $resultData = array();
     foreach ($products->data as $obj) {
       $i = false;

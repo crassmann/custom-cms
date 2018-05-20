@@ -97,16 +97,9 @@ use app\config;
         </div>
       </nav>
 
-      <main role="main" class="container">
-
       <?php
-        // View
-        \core\view::render($file, $args);
-      ?>
-
-      </main><!-- /.container -->
-
-      <?php
+      // View
+      \core\view::render($file, $args);
 
       // Footer view
       if (!isset($args['namespace']) || $args['namespace'] != 'admin') {

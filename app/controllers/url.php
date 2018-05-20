@@ -20,6 +20,7 @@ class url extends \core\controller
    */
   public function showAction()
   {
+  //  var_dump($this->settings);
 
     $navigation = new \app\models\navigation();
     $this->route_params['navigation'] = $navigation::getNavigation(1);

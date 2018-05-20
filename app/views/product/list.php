@@ -64,10 +64,10 @@ $(document).ready(function(){
       console.log(filterVal);
 
       if (filterVal === 'all'){
-        $prdcts.show('slow');
+        $prdcts.fadeIn('slow');
       } else {
          // hide all then filter the ones to show
-         $prdcts.hide('slow').filter('.' + filterVal).show('slow');
+         $prdcts.fadeOut(20).filter('.' + filterVal).fadeIn('slow');
       }
   });
 });
